@@ -23,7 +23,7 @@ export const DEFAULT_TEMPLATES: EmailTemplate[] = [
     .outer { background-color: #050505; padding: 40px 20px; }
     .card { max-width: 600px; margin: 0 auto; background-color: #0C0C0C; border: 1px solid rgba(201,150,58,0.15); overflow: hidden; }
     .header { padding: 40px; text-align: center; border-bottom: 1px solid rgba(201,150,58,0.1); }
-    .logo { width: 80px; height: 80px; border-radius: 6%; margin-bottom: 20px; }
+    .logo { width: 80px; height: 80px; border-radius: 6%; margin-bottom: 20px; border: 1px solid rgba(201,150,58,0.2); }
     .content { padding: 40px; text-align: center; color: #F5F0E8; }
     .h1 { font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 300; margin: 0 0 20px; line-height: 1.1; }
     .h1 em { font-style: italic; color: #C9963A; }
@@ -63,32 +63,32 @@ export const DEFAULT_TEMPLATES: EmailTemplate[] = [
   <style>
     body { margin: 0; padding: 0; background-color: #050505; font-family: 'DM Sans', sans-serif; }
     .outer { background-color: #050505; padding: 40px 20px; }
-    .card { max-width: 600px; margin: 0 auto; background-color: #0C0C0C; border: 1px solid rgba(201,150,58,0.15); }
-    .ticker { background: #C9963A; padding: 8px; text-align: center; font-size: 9px; font-weight: 700; letter-spacing: 0.3em; color: #080808; text-transform: uppercase; }
-    .hero { position: relative; height: 240px; background: #111; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-    .logo-bg { position: absolute; width: 120%; opacity: 0.05; filter: grayscale(1); }
-    .content { padding: 48px; color: #F5F0E8; }
+    .card { max-width: 600px; margin: 0 auto; background-color: #0C0C0C; border: 1px solid rgba(201,150,58,0.15); overflow: hidden; }
+    .ticker { background: linear-gradient(90deg, #C9963A, #E8C06A, #C9963A); padding: 8px; text-align: center; font-size: 9px; font-weight: 700; letter-spacing: 0.3em; color: #080808; text-transform: uppercase; }
+    .hero { padding: 40px; text-align: center; border-bottom: 1px solid rgba(201,150,58,0.1); }
+    .logo { width: 60px; height: 60px; border-radius: 6%; border: 1px solid rgba(201,150,58,0.2); }
+    .content { padding: 48px; color: #F5F0E8; text-align: center; }
     .label { color: #C9963A; font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase; margin-bottom: 12px; display: block; }
     .h2 { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; margin: 0 0 16px; }
     .body { color: #888; font-size: 14px; line-height: 1.8; margin-bottom: 24px; }
-    .feature { border-left: 1px solid #C9963A; padding-left: 20px; margin: 20px 0; color: #aaa; font-style: italic; }
+    .feature { border-left: 1px solid #C9963A; padding-left: 20px; margin: 20px 0; color: #aaa; font-style: italic; text-align: left; }
   </style>
 </head>
 <body>
   <div class="outer">
     <div class="card">
-      <div class="ticker">Release Notes &bull; Version 2.4.0</div>
+      <div class="ticker">SMIC360 &bull; Release Notes &bull; Version 2.4.0</div>
       <div class="hero">
-        <img src="${LOGO_URL}" alt="SMIC360" style="width: 80px; z-index: 10; border-radius: 6%;">
+        <img src="${LOGO_URL}" alt="SMIC360" class="logo">
       </div>
       <div class="content">
         <span class="label">Evolution</span>
         <h2 class="h2">The Future is <em>Seamless</em></h2>
-        <p class="body">We have refined the core engine of SMIC360 Ltd. Experience faster processing, enhanced security protocols, and our new dark interface designed for focus.</p>
+        <p class="body">We have refined the core engine of SMIC360 Ltd. Experience faster processing and enhanced security protocols designed for high-stakes environments.</p>
         <div class="feature">
-          "The most significant upgrade in our history, bringing unparalleled precision to your daily operations."
+          "The most significant upgrade in our history, bringing unparalleled precision to your operations."
         </div>
-        <p class="body">Update now to access the next generation of professional tools.</p>
+        <p class="body">Access the next generation of professional tools.</p>
       </div>
     </div>
   </div>
@@ -109,9 +109,9 @@ export const DEFAULT_TEMPLATES: EmailTemplate[] = [
     .outer { padding: 40px 20px; }
     .invoice { max-width: 700px; margin: 0 auto; background: #0C0C0C; border: 1px solid rgba(201,150,58,0.15); padding: 50px; }
     .header { border-bottom: 1px solid rgba(201,150,58,0.1); padding-bottom: 30px; margin-bottom: 40px; }
-    .logo { width: 50px; border-radius: 6%; float: left; }
+    .logo { width: 50px; height: 50px; border-radius: 6%; float: left; border: 1px solid rgba(201,150,58,0.2); }
     .brand { float: left; margin-left: 15px; font-family: 'Cormorant Garamond', serif; font-size: 24px; color: #C9963A; padding-top: 10px; }
-    .invoice-id { float: right; text-align: right; font-size: 11px; letter-spacing: 0.1em; padding-top: 15px; }
+    .invoice-id { float: right; text-align: right; font-size: 11px; letter-spacing: 0.1em; padding-top: 15px; color: #555; }
     .clear { clear: both; }
     table { width: 100%; border-collapse: collapse; margin-top: 20px; }
     th { text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em; color: #555; padding-bottom: 15px; border-bottom: 1px solid #1a1a1a; }
@@ -169,8 +169,8 @@ export const DEFAULT_TEMPLATES: EmailTemplate[] = [
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     body { background: #050505; font-family: 'DM Sans', sans-serif; margin: 0; padding: 0; }
-    .card { max-width: 450px; margin: 60px auto; background: #0C0C0C; border: 1px solid rgba(201,150,58,0.2); padding: 50px; text-align: center; }
-    .logo { width: 60px; border-radius: 6%; margin-bottom: 30px; border: 1px solid rgba(201,150,58,0.2); }
+    .card { max-width: 450px; margin: 60px auto; background: #0C0C0C; border: 1px solid rgba(201,150,58,0.2); padding: 50px; text-align: center; overflow: hidden; }
+    .logo { width: 60px; height: 60px; border-radius: 6%; margin-bottom: 30px; border: 1px solid rgba(201,150,58,0.2); }
     .h2 { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 300; color: #F5F0E8; margin-bottom: 20px; }
     .body { font-size: 14px; color: #666; line-height: 1.7; margin-bottom: 30px; }
     .btn { display: inline-block; background: #000; color: #C9963A; border: 1px solid #C9963A; padding: 14px 30px; text-decoration: none; font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; }
@@ -189,7 +189,7 @@ export const DEFAULT_TEMPLATES: EmailTemplate[] = [
   },
   {
     id: 'newsletter',
-    title: 'Weekly Newsletter',
+    title: 'Weekly Insights',
     category: 'Marketing',
     html: `<!DOCTYPE html>
 <html>
@@ -198,8 +198,9 @@ export const DEFAULT_TEMPLATES: EmailTemplate[] = [
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
   <style>
     body { background: #050505; font-family: 'DM Sans', sans-serif; margin: 0; padding: 0; }
-    .container { max-width: 650px; margin: 0 auto; background: #0C0C0C; border: 1px solid rgba(201,150,58,0.1); }
-    .header { padding: 50px 40px; text-align: center; background: #080808; }
+    .container { max-width: 650px; margin: 0 auto; background: #0C0C0C; border: 1px solid rgba(201,150,58,0.1); overflow: hidden; }
+    .header { padding: 50px 40px; text-align: center; background: #080808; border-bottom: 1px solid rgba(201,150,58,0.1); }
+    .logo { width: 50px; height: 50px; border-radius: 6%; margin-bottom: 15px; border: 1px solid rgba(201,150,58,0.2); }
     .brand-name { font-family: 'Cormorant Garamond', serif; font-size: 36px; color: #F5F0E8; letter-spacing: 0.1em; margin-bottom: 5px; }
     .issue { font-size: 9px; color: #C9963A; letter-spacing: 0.4em; text-transform: uppercase; }
     .article { padding: 40px; border-bottom: 1px solid #111; }
@@ -212,7 +213,7 @@ export const DEFAULT_TEMPLATES: EmailTemplate[] = [
 <body>
   <div class="container">
     <div class="header">
-      <img src="${LOGO_URL}" style="width:40px; border-radius:6%; margin-bottom:15px;">
+      <img src="${LOGO_URL}" class="logo">
       <div class="brand-name">SMIC360 <em>Insights</em></div>
       <div class="issue">Issue No. 124 &bull; Volume 4</div>
     </div>
@@ -277,10 +278,6 @@ export const DEFAULT_TEMPLATES: EmailTemplate[] = [
       overflow: hidden;
       box-shadow: 0 40px 120px rgba(0,0,0,0.9);
     }
-
-    /* ── FONTS ───────────────────────────────────────────────────── */
-    .f-serif  { font-family: 'Cormorant Garamond', Georgia, serif; }
-    .f-sans   { font-family: 'DM Sans', Arial, sans-serif; }
 
     /* ── TOP TICKER ──────────────────────────────────────────────── */
     .ticker {
@@ -381,8 +378,9 @@ export const DEFAULT_TEMPLATES: EmailTemplate[] = [
                 <img src="https://res.cloudinary.com/dwsl2ktt2/image/upload/f_auto,q_auto,w_800/5_yc05lt.jpg" alt="Living Room" style="width:100%; border:1px solid rgba(201,150,58,0.12);">
               </div>
               <div class="footer">
-                <p style="color:#C9963A; font-family:serif; font-size:24px;">Milehigh5280 🌴</p>
-                <p style="color:#555; font-size:10px; letter-spacing:0.3em; text-transform:uppercase;">Ayi Mensah · Accra · Ghana</p>
+                <img src="${LOGO_URL}" width="40" height="40" style="border-radius:6%; margin-bottom:10px; border:1px solid rgba(201,150,58,0.2);">
+                <p style="color:#C9963A; font-family:serif; font-size:24px; margin:0;">SMIC360 🌴</p>
+                <p style="color:#555; font-size:10px; letter-spacing:0.3em; text-transform:uppercase; margin:5px 0 0;">Excellence &bull; Accra &bull; Global</p>
               </div>
             </td>
           </tr>

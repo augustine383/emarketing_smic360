@@ -1,10 +1,11 @@
+
 "use client";
 
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Copy, Edit3, Save, RotateCcw, Eye, Maximize2 } from "lucide-react";
+import { Copy, Edit3, Save, RotateCcw, Eye, Maximize2, Check } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { EmailTemplate } from '@/lib/templates';
 import { Badge } from "@/components/ui/badge";
@@ -25,6 +26,7 @@ interface TemplateCardProps {
 export function TemplateCard({ template, onUpdate, onReset }: TemplateCardProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [htmlContent, setHtmlContent] = useState(template.html);
+  const [isCopied, setIsCopied] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -33,17 +35,41 @@ export function TemplateCard({ template, onUpdate, onReset }: TemplateCardProps)
 
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(htmlContent);
+      // Smart Copy: Attempts to copy as both Rich Text (Rendered) and Plain Text (Source)
+      // This allows pasting directly into Gmail/Outlook as a rendered email.
+      const type = "text/html";
+      const blob = new Blob([htmlContent], { type });
+      const data = [new ClipboardItem({
+        [type]: blob,
+        "text/plain": new Blob([htmlContent], { type: "text/plain" })
+      })];
+      
+      await navigator.clipboard.write(data);
+      
+      setIsCopied(true);
+      setTimeout(() => setIsCopied(false), 2000);
+
       toast({
-        title: "Copied!",
-        description: "HTML content copied to clipboard.",
+        title: "Template Copied",
+        description: "Ready to paste into Gmail, Outlook, or your code editor.",
       });
     } catch (err) {
-      toast({
-        title: "Error",
-        description: "Failed to copy content.",
-        variant: "destructive",
-      });
+      // Fallback for browsers that don't support ClipboardItem fully
+      try {
+        await navigator.clipboard.writeText(htmlContent);
+        setIsCopied(true);
+        setTimeout(() => setIsCopied(false), 2000);
+        toast({
+          title: "Code Copied",
+          description: "Raw HTML source copied to clipboard.",
+        });
+      } catch (fallbackErr) {
+        toast({
+          title: "Error",
+          description: "Failed to copy content.",
+          variant: "destructive",
+        });
+      }
     }
   };
 
@@ -52,7 +78,7 @@ export function TemplateCard({ template, onUpdate, onReset }: TemplateCardProps)
     setIsEditing(false);
     toast({
       title: "Saved",
-      description: "Changes saved to local vault.",
+      description: "Changes saved to SMIC360 vault.",
     });
   };
 
@@ -61,7 +87,7 @@ export function TemplateCard({ template, onUpdate, onReset }: TemplateCardProps)
     setIsEditing(false);
     toast({
       title: "Reset Complete",
-      description: "Template restored to defaults.",
+      description: "Template restored to original SMIC360 standard.",
     });
   };
 
@@ -69,12 +95,12 @@ export function TemplateCard({ template, onUpdate, onReset }: TemplateCardProps)
     <Card className="flex flex-col h-full bg-card/40 border-white/5 overflow-hidden ring-1 ring-white/5 hover:ring-white/10 transition-all group">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
         <div className="space-y-1">
-          <Badge variant="outline" className="text-[10px] uppercase tracking-widest text-muted-foreground border-muted-foreground/20">
+          <Badge variant="outline" className="text-[10px] uppercase tracking-widest text-primary border-primary/20 bg-primary/5">
             {template.category}
           </Badge>
           <CardTitle className="text-xl font-headline font-semibold text-foreground">{template.title}</CardTitle>
         </div>
-        <div className="flex gap-1">
+        <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
           <Dialog>
             <DialogTrigger asChild>
               <Button 
@@ -86,9 +112,13 @@ export function TemplateCard({ template, onUpdate, onReset }: TemplateCardProps)
                 <Maximize2 className="h-4 w-4" />
               </Button>
             </DialogTrigger>
-            <DialogContent className="max-w-4xl w-[90vw] h-[80vh] flex flex-col p-0 overflow-hidden bg-white border-none">
-              <DialogHeader className="p-4 border-b bg-background">
+            <DialogContent className="max-w-5xl w-[95vw] h-[90vh] flex flex-col p-0 overflow-hidden bg-white border-none">
+              <DialogHeader className="p-4 border-b bg-background flex flex-row items-center justify-between space-y-0">
                 <DialogTitle className="text-foreground">{template.title} - Full Preview</DialogTitle>
+                <Button onClick={handleCopy} size="sm" className="gap-2 bg-primary text-primary-foreground">
+                  {isCopied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                  Copy for Email
+                </Button>
               </DialogHeader>
               <div className="flex-1 w-full bg-white">
                 <iframe 
@@ -109,24 +139,15 @@ export function TemplateCard({ template, onUpdate, onReset }: TemplateCardProps)
           >
             {isEditing ? <Eye className="h-4 w-4" /> : <Edit3 className="h-4 w-4" />}
           </Button>
-          <Button 
-            variant="ghost" 
-            size="icon" 
-            onClick={handleCopy} 
-            className="hover:bg-primary/10 hover:text-primary transition-colors h-8 w-8"
-            title="Copy Raw HTML"
-          >
-            <Copy className="h-4 w-4" />
-          </Button>
         </div>
       </CardHeader>
       
-      <CardContent className="flex-1 min-h-[300px] max-h-[400px] overflow-hidden p-0 border-y border-white/5 relative bg-muted/10">
+      <CardContent className="flex-1 min-h-[350px] max-h-[450px] overflow-hidden p-0 border-y border-white/5 relative bg-muted/5">
         {isEditing ? (
           <Textarea 
             value={htmlContent}
             onChange={(e) => setHtmlContent(e.target.value)}
-            className="w-full h-full resize-none font-code text-xs bg-transparent border-none focus-visible:ring-0 p-4 custom-scrollbar"
+            className="w-full h-full resize-none font-code text-[11px] bg-transparent border-none focus-visible:ring-0 p-6 custom-scrollbar leading-relaxed text-muted-foreground"
             spellCheck={false}
           />
         ) : (
@@ -145,25 +166,26 @@ export function TemplateCard({ template, onUpdate, onReset }: TemplateCardProps)
         {isEditing ? (
           <Button 
             onClick={handleSave} 
-            className="flex-1 bg-primary text-primary-foreground hover:bg-primary/90 gap-2 h-9 text-xs"
+            className="flex-1 bg-primary text-primary-foreground hover:bg-primary/90 gap-2 h-10 font-medium"
           >
-            <Save className="h-3.5 w-3.5" /> Save Changes
+            <Save className="h-4 w-4" /> Save Changes
           </Button>
         ) : (
           <Button 
-            variant="outline"
-            className="flex-1 border-white/10 text-muted-foreground h-9 text-xs cursor-default hover:bg-transparent"
+            onClick={handleCopy}
+            className="flex-1 bg-primary text-primary-foreground hover:bg-primary/90 gap-2 h-10 font-medium shadow-lg shadow-primary/10"
           >
-            Standard Template
+            {isCopied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+            Copy Template
           </Button>
         )}
         <Button 
           variant="outline" 
           onClick={handleReset} 
-          className="bg-transparent border-white/10 hover:bg-destructive/10 hover:text-destructive hover:border-destructive/20 h-9 px-3"
+          className="bg-transparent border-white/10 hover:bg-destructive/10 hover:text-destructive hover:border-destructive/20 h-10 px-3"
           title="Reset to Default"
         >
-          <RotateCcw className="h-3.5 w-3.5" />
+          <RotateCcw className="h-4 w-4" />
         </Button>
       </CardFooter>
     </Card>
