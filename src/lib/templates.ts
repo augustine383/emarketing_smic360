@@ -1,3 +1,4 @@
+
 export interface EmailTemplate {
   id: string;
   title: string;
