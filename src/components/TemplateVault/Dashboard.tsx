@@ -4,11 +4,13 @@ import React, { useState, useEffect } from 'react';
 import { DEFAULT_TEMPLATES, EmailTemplate } from '@/lib/templates';
 import { TemplateCard } from './TemplateCard';
 import { Input } from "@/components/ui/input";
-import { Search, LogOut, LayoutGrid, Info } from "lucide-react";
+import { Search, LogOut, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Toaster } from "@/components/ui/toaster";
+import Image from 'next/image';
 
-const STORAGE_KEY = "template_vault_data";
+const STORAGE_KEY = "smic360_vault_data";
+const LOGO_URL = "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1777107241/cropped-SMIC-01-180x180_pffxe7.jpg";
 
 export function Dashboard() {
   const [templates, setTemplates] = useState<EmailTemplate[]>([]);
@@ -52,7 +54,7 @@ export function Dashboard() {
   );
 
   const handleLogout = () => {
-    window.location.reload(); // Simple way to clear auth state for this local app
+    window.location.reload(); 
   };
 
   return (
@@ -60,11 +62,17 @@ export function Dashboard() {
       <header className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-md border-b border-white/5 py-4 px-6 md:px-10">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex items-center gap-4">
-            <div className="bg-primary/10 p-2 rounded-lg ring-1 ring-primary/20">
-              <LayoutGrid className="w-6 h-6 text-primary" />
+            <div className="bg-white p-1 rounded-lg ring-1 ring-white/10 overflow-hidden">
+              <Image 
+                src={LOGO_URL} 
+                alt="SMIC360 Logo" 
+                width={40} 
+                height={40} 
+                className="object-contain"
+              />
             </div>
             <div>
-              <h1 className="text-2xl font-headline font-bold text-foreground">TemplateVault</h1>
+              <h1 className="text-2xl font-headline font-bold text-foreground">SMIC360 Ltd</h1>
               <p className="text-xs text-muted-foreground uppercase tracking-widest font-medium">Email Templates Dashboard</p>
             </div>
           </div>
@@ -113,7 +121,7 @@ export function Dashboard() {
 
       <footer className="border-t border-white/5 py-8 px-6 md:px-10 mt-12">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted-foreground">
-          <p>&copy; 2024 TemplateVault Premium. All rights reserved.</p>
+          <p>&copy; 2024 SMIC360 Ltd. All rights reserved.</p>
           <div className="flex gap-6">
             <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>

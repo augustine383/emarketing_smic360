@@ -4,10 +4,12 @@ import React, { useState } from 'react';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Lock, AlertCircle, ShieldCheck } from "lucide-react";
+import { AlertCircle, ShieldCheck } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import Image from 'next/image';
 
 const VAULT_PIN = "1234567";
+const LOGO_URL = "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1777107241/cropped-SMIC-01-180x180_pffxe7.jpg";
 
 interface AuthScreenProps {
   onSuccess: () => void;
@@ -31,11 +33,17 @@ export function AuthScreen({ onSuccess }: AuthScreenProps) {
     <div className="min-h-screen flex items-center justify-center bg-background p-6">
       <Card className="w-full max-w-md border-none shadow-2xl bg-card/50 backdrop-blur-xl ring-1 ring-white/5">
         <CardHeader className="text-center space-y-4 pt-10 pb-6">
-          <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center ring-4 ring-primary/5">
-            <Lock className="w-8 h-8 text-primary" />
+          <div className="mx-auto w-20 h-20 bg-white rounded-full flex items-center justify-center ring-4 ring-primary/5 overflow-hidden">
+            <Image 
+              src={LOGO_URL} 
+              alt="SMIC360 Logo" 
+              width={80} 
+              height={80} 
+              className="object-contain"
+            />
           </div>
           <div className="space-y-2">
-            <CardTitle className="text-3xl font-headline tracking-tight text-foreground">TemplateVault</CardTitle>
+            <CardTitle className="text-3xl font-headline tracking-tight text-foreground">SMIC360 Ltd</CardTitle>
             <CardDescription className="text-muted-foreground">Enter your 7-digit secure PIN to access the vault.</CardDescription>
           </div>
         </CardHeader>

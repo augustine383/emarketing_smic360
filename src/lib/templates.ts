@@ -25,7 +25,7 @@ export const DEFAULT_TEMPLATES: EmailTemplate[] = [
 <body>
   <div class="container">
     <div class="header">
-      <h1>Welcome to TemplateVault</h1>
+      <h1>Welcome to SMIC360</h1>
     </div>
     <div class="content">
       <h2>Hello there!</h2>
@@ -34,7 +34,7 @@ export const DEFAULT_TEMPLATES: EmailTemplate[] = [
       <a href="#" class="button">Get Started</a>
     </div>
     <div class="footer">
-      &copy; 2024 TemplateVault Inc. All rights reserved.
+      &copy; 2024 SMIC360 Ltd. All rights reserved.
     </div>
   </div>
 </body>
@@ -57,7 +57,7 @@ export const DEFAULT_TEMPLATES: EmailTemplate[] = [
 </head>
 <body>
   <div class="card">
-    <div class="img-placeholder">Product Image Banner</div>
+    <div class="img-placeholder">SMIC360 Product Update</div>
     <div class="body-text">
       <span class="tag">NEW UPDATE</span>
       <h1 style="margin-top: 15px;">Version 2.0 is Here!</h1>
@@ -94,7 +94,7 @@ export const DEFAULT_TEMPLATES: EmailTemplate[] = [
         <td colspan="2">
           <table>
             <tr>
-              <td class="title" style="font-size: 35px; color: #1F1C17; font-weight: bold;">Vault</td>
+              <td class="title" style="font-size: 35px; color: #1F1C17; font-weight: bold;">SMIC360</td>
               <td style="text-align: right;">Invoice #: 123<br>Created: May 20, 2024</td>
             </tr>
           </table>
@@ -128,7 +128,7 @@ export const DEFAULT_TEMPLATES: EmailTemplate[] = [
     <h2 style="color: #333;">Reset Your Password</h2>
     <p style="color: #666;">We received a request to reset your password. If you didn't make this request, just ignore this email.</p>
     <a href="#" style="background: #E87E46; color: white; padding: 15px 25px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 20px;">Reset Password</a>
-    <p style="font-size: 12px; color: #aaa; margin-top: 30px;">Button not working? Copy this link: https://vault.app/reset/token123</p>
+    <p style="font-size: 12px; color: #aaa; margin-top: 30px;">Button not working? Copy this link: https://smic360.app/reset/token123</p>
   </div>
 </body>
 </html>`
@@ -149,7 +149,7 @@ export const DEFAULT_TEMPLATES: EmailTemplate[] = [
 </head>
 <body>
   <div class="news-card">
-    <div class="header">THE VAULT TIMES</div>
+    <div class="header">SMIC360 INSIGHTS</div>
     <div class="article">
       <div class="article-title">Why Minimalist Design is the Future</div>
       <p>Experts suggest that reducing visual clutter is key to increasing user engagement in 2024...</p>

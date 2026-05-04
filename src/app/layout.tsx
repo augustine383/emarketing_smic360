@@ -2,7 +2,7 @@ import type {Metadata} from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'TemplateVault | Premium Email Templates',
+  title: 'SMIC360 Ltd | Premium Email Templates',
   description: 'Manage and refine your professional email templates.',
 };
 
