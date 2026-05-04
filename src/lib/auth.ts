@@ -8,6 +8,10 @@ export interface UserAccount {
   role: UserRole;
 }
 
+/**
+ * Initial authorized personnel for the SMIC360 Vault.
+ * These are used to seed the local storage on first run.
+ */
 export const INITIAL_USERS: UserAccount[] = [
   { id: '1', username: 'admin', pin: '1234567', role: 'Admin' },
   { id: '2', username: 'manager', pin: '2222222', role: 'Manager' },
