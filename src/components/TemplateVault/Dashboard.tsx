@@ -90,7 +90,7 @@ export function Dashboard() {
         <div className="flex items-center gap-2 mb-8 bg-primary/5 border border-primary/10 p-4 rounded-xl">
           <Info className="w-5 h-5 text-primary shrink-0" />
           <p className="text-sm text-muted-foreground">
-            All changes are stored locally in your browser. Use the <strong className="text-primary font-medium">AI Refine</strong> tool to improve email engagement and readability using Gemini.
+            All changes are stored locally in your browser. You can edit the HTML directly and copy it for use in your email service provider.
           </p>
         </div>
 

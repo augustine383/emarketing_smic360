@@ -4,10 +4,9 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Copy, Edit3, Save, RotateCcw, Eye, Sparkles, Check, Loader2 } from "lucide-react";
+import { Copy, Edit3, Save, RotateCcw, Eye, Check } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { EmailTemplate } from '@/lib/templates';
-import { refineEmailTemplate } from '@/ai/flows/refine-email-template-flow';
 import { Badge } from "@/components/ui/badge";
 
 interface TemplateCardProps {
@@ -19,7 +18,6 @@ interface TemplateCardProps {
 export function TemplateCard({ template, onUpdate, onReset }: TemplateCardProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [htmlContent, setHtmlContent] = useState(template.html);
-  const [isRefining, setIsRefining] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -58,28 +56,6 @@ export function TemplateCard({ template, onUpdate, onReset }: TemplateCardProps)
       title: "Reset Complete",
       description: "Template restored to defaults.",
     });
-  };
-
-  const handleRefine = async () => {
-    setIsRefining(true);
-    try {
-      const result = await refineEmailTemplate({ htmlContent });
-      setHtmlContent(result.refinedHtmlContent);
-      toast({
-        title: "AI Refinement Complete",
-        description: "The template has been optimized for better engagement.",
-      });
-      // Auto-save the refined content
-      onUpdate({ ...template, html: result.refinedHtmlContent });
-    } catch (err) {
-      toast({
-        title: "Refinement Failed",
-        description: "Could not refine template at this time.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsRefining(false);
-    }
   };
 
   return (
@@ -143,12 +119,10 @@ export function TemplateCard({ template, onUpdate, onReset }: TemplateCardProps)
           </Button>
         ) : (
           <Button 
-            onClick={handleRefine} 
-            disabled={isRefining}
-            className="flex-1 bg-accent text-accent-foreground hover:bg-accent/90 gap-2 h-9 text-xs shadow-lg shadow-accent/10"
+            variant="outline"
+            className="flex-1 border-white/10 text-muted-foreground h-9 text-xs cursor-default hover:bg-transparent"
           >
-            {isRefining ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Sparkles className="h-3.5 w-3.5" />}
-            {isRefining ? 'Refining...' : 'AI Refine'}
+            Standard Template
           </Button>
         )}
         <Button 
