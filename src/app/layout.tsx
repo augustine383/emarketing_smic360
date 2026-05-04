@@ -4,6 +4,9 @@ import './globals.css';
 export const metadata: Metadata = {
   title: 'SMIC360 Ltd | Premium Email Templates',
   description: 'Manage and refine your professional email templates.',
+  icons: {
+    icon: 'https://res.cloudinary.com/dwsl2ktt2/image/upload/v1777107241/cropped-SMIC-01-180x180_pffxe7.jpg',
+  },
 };
 
 export default function RootLayout({
