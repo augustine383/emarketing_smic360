@@ -1,11 +1,10 @@
-
 "use client";
 
 import React, { useState, useEffect } from 'react';
 import { DEFAULT_TEMPLATES, EmailTemplate } from '@/lib/templates';
 import { TemplateCard } from './TemplateCard';
 import { Input } from "@/components/ui/input";
-import { Search, LogOut, Info } from "lucide-react";
+import { Search, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Toaster } from "@/components/ui/toaster";
 import Image from 'next/image';
@@ -101,13 +100,6 @@ export function Dashboard() {
       </header>
 
       <main className="flex-1 max-w-7xl mx-auto w-full p-6 md:p-10">
-        <div className="flex items-center gap-2 mb-8 bg-primary/5 border border-primary/10 p-4 rounded-xl">
-          <Info className="w-5 h-5 text-primary shrink-0" />
-          <p className="text-sm text-muted-foreground">
-            All changes are stored locally in your browser. You can edit the HTML directly and copy it for use in your email service provider.
-          </p>
-        </div>
-
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {filteredTemplates.map(template => (
             <TemplateCard 
