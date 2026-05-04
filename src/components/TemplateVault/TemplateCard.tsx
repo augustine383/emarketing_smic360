@@ -4,10 +4,17 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Copy, Edit3, Save, RotateCcw, Eye, Check } from "lucide-react";
+import { Copy, Edit3, Save, RotateCcw, Eye, Maximize2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { EmailTemplate } from '@/lib/templates';
 import { Badge } from "@/components/ui/badge";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 interface TemplateCardProps {
   template: EmailTemplate;
@@ -68,6 +75,31 @@ export function TemplateCard({ template, onUpdate, onReset }: TemplateCardProps)
           <CardTitle className="text-xl font-headline font-semibold text-foreground">{template.title}</CardTitle>
         </div>
         <div className="flex gap-1">
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="hover:bg-primary/10 hover:text-primary transition-colors h-8 w-8"
+                title="Full Preview"
+              >
+                <Maximize2 className="h-4 w-4" />
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-4xl w-[90vw] h-[80vh] flex flex-col p-0 overflow-hidden bg-white border-none">
+              <DialogHeader className="p-4 border-b bg-background">
+                <DialogTitle className="text-foreground">{template.title} - Full Preview</DialogTitle>
+              </DialogHeader>
+              <div className="flex-1 w-full bg-white">
+                <iframe 
+                  srcDoc={htmlContent} 
+                  title={`${template.title} full preview`}
+                  className="w-full h-full border-none"
+                />
+              </div>
+            </DialogContent>
+          </Dialog>
+
           <Button 
             variant="ghost" 
             size="icon" 
