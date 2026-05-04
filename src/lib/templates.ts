@@ -18,22 +18,22 @@ export const DEFAULT_TEMPLATES: EmailTemplate[] = [
   <style>
     body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }
     .container { max-width: 600px; margin: 40px auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-    .header { background-color: #CCB94D; padding: 30px; text-align: center; color: #1F1C17; }
+    .header { background-color: #1F1C17; padding: 30px; text-align: center; color: #CCB94D; }
     .logo { width: 60px; height: 60px; border-radius: 6%; margin-bottom: 15px; }
     .content { padding: 40px; color: #333333; line-height: 1.6; }
     .footer { background-color: #f9f9f9; padding: 20px; text-align: center; font-size: 12px; color: #999999; }
-    .button { display: inline-block; padding: 12px 24px; background-color: #1F1C17; color: #CCB94D; text-decoration: none; border-radius: 4px; font-weight: bold; margin-top: 20px; }
+    .button { display: inline-block; padding: 12px 24px; background-color: #CCB94D; color: #1F1C17; text-decoration: none; border-radius: 4px; font-weight: bold; margin-top: 20px; }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
       <img src="${LOGO_URL}" alt="SMIC360" class="logo">
-      <h1>Welcome to SMIC360</h1>
+      <h1>Welcome to SMIC360 Ltd</h1>
     </div>
     <div class="content">
       <h2>Hello there!</h2>
-      <p>We're thrilled to have you join our premium platform. You're now part of an exclusive group dedicated to excellence in communication.</p>
+      <p>We're thrilled to have you join SMIC360 Ltd. You're now part of an exclusive group dedicated to excellence in communication.</p>
       <p>Explore your dashboard to see what we've prepared for you.</p>
       <a href="#" class="button">Get Started</a>
     </div>
@@ -67,9 +67,9 @@ export const DEFAULT_TEMPLATES: EmailTemplate[] = [
     </div>
     <div class="body-text">
       <span class="tag">NEW UPDATE</span>
-      <h1 style="margin-top: 15px;">Version 2.0 is Here!</h1>
+      <h1 style="margin-top: 15px;">SMIC360 Ltd Version 2.0</h1>
       <p>We've completely redesigned the interface to bring you a more fluid and intuitive experience. Check out the new dark mode features and enhanced collaboration tools.</p>
-      <p>Our team has worked tirelessly to improve performance across the board.</p>
+      <p>Our team at SMIC360 Ltd has worked tirelessly to improve performance across the board.</p>
       <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;">
       <p style="font-size: 14px; color: #666;">View the full release notes on our blog.</p>
     </div>
@@ -124,6 +124,9 @@ export const DEFAULT_TEMPLATES: EmailTemplate[] = [
         <td>Total: $49.00</td>
       </tr>
     </table>
+    <div style="margin-top: 40px; text-align: center; color: #999; font-size: 12px;">
+      SMIC360 Ltd, Professional Solutions
+    </div>
   </div>
 </body>
 </html>`
@@ -138,7 +141,7 @@ export const DEFAULT_TEMPLATES: EmailTemplate[] = [
   <div style="background: #fff; padding: 30px; max-width: 400px; margin: auto; border-radius: 10px; text-align: center;">
     <img src="${LOGO_URL}" alt="SMIC360" style="width: 60px; height: 60px; border-radius: 6%; margin-bottom: 20px;">
     <h2 style="color: #333;">Reset Your Password</h2>
-    <p style="color: #666;">We received a request to reset your password. If you didn't make this request, just ignore this email.</p>
+    <p style="color: #666;">We received a request to reset your SMIC360 Ltd password. If you didn't make this request, just ignore this email.</p>
     <a href="#" style="background: #E87E46; color: white; padding: 15px 25px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 20px;">Reset Password</a>
     <p style="font-size: 12px; color: #aaa; margin-top: 30px;">Button not working? Copy this link: https://smic360.app/reset/token123</p>
   </div>
@@ -168,11 +171,14 @@ export const DEFAULT_TEMPLATES: EmailTemplate[] = [
     </div>
     <div class="article">
       <div class="article-title">Why Minimalist Design is the Future</div>
-      <p>Experts suggest that reducing visual clutter is key to increasing user engagement in 2024...</p>
+      <p>Experts at SMIC360 Ltd suggest that reducing visual clutter is key to increasing user engagement in 2024...</p>
     </div>
     <div class="article">
       <div class="article-title">The Art of the Email Subject Line</div>
       <p>How a few words can determine the success of your entire campaign...</p>
+    </div>
+    <div style="text-align: center; margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px; color: #777; font-size: 11px;">
+      &copy; 2024 SMIC360 Ltd. All rights reserved.
     </div>
   </div>
 </body>
