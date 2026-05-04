@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useState, useEffect } from 'react';
@@ -6,10 +7,11 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Copy, Edit3, Save, RotateCcw, Eye, Maximize2, Check, Trash2, X } from "lucide-react";
+import { Copy, Edit3, Save, RotateCcw, Maximize2, Check, Trash2, X } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { EmailTemplate } from '@/lib/templates';
 import { Badge } from "@/components/ui/badge";
+import { UserAccount } from '@/lib/auth';
 import {
   Dialog,
   DialogContent,
@@ -31,18 +33,22 @@ import {
 
 interface TemplateCardProps {
   template: EmailTemplate;
+  currentUser: UserAccount;
   onUpdate: (updatedTemplate: EmailTemplate) => void;
   onReset: (id: string) => void;
   onDelete: (id: string) => void;
 }
 
-export function TemplateCard({ template, onUpdate, onReset, onDelete }: TemplateCardProps) {
+export function TemplateCard({ template, currentUser, onUpdate, onReset, onDelete }: TemplateCardProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [title, setTitle] = useState(template.title);
   const [category, setCategory] = useState(template.category);
   const [htmlContent, setHtmlContent] = useState(template.html);
   const [isCopied, setIsCopied] = useState(false);
   const { toast } = useToast();
+
+  const canEdit = currentUser.role === 'Admin' || currentUser.role === 'Manager';
+  const canDelete = currentUser.role === 'Admin';
 
   useEffect(() => {
     setTitle(template.title);
@@ -65,8 +71,8 @@ export function TemplateCard({ template, onUpdate, onReset, onDelete }: Template
       setTimeout(() => setIsCopied(false), 2000);
 
       toast({
-        title: "Template Copied",
-        description: "Ready to paste into Gmail or Outlook.",
+        title: "Success",
+        description: "Template copied for direct paste into email client.",
       });
     } catch (err) {
       try {
@@ -80,7 +86,7 @@ export function TemplateCard({ template, onUpdate, onReset, onDelete }: Template
       } catch (fallbackErr) {
         toast({
           title: "Error",
-          description: "Failed to copy content.",
+          description: "Clipboard access denied.",
           variant: "destructive",
         });
       }
@@ -91,8 +97,8 @@ export function TemplateCard({ template, onUpdate, onReset, onDelete }: Template
     onUpdate({ ...template, title, category, html: htmlContent });
     setIsEditing(false);
     toast({
-      title: "Saved",
-      description: "Changes saved to SMIC360 vault.",
+      title: "Success",
+      description: "Changes committed to vault storage.",
     });
   };
 
@@ -100,8 +106,8 @@ export function TemplateCard({ template, onUpdate, onReset, onDelete }: Template
     onReset(template.id);
     setIsEditing(false);
     toast({
-      title: "Reset Complete",
-      description: "Template restored to original standard.",
+      title: "Reset",
+      description: "Restored to factory standard.",
     });
   };
 
@@ -164,7 +170,7 @@ export function TemplateCard({ template, onUpdate, onReset, onDelete }: Template
                     <DialogTitle className="text-foreground">{template.title} - Preview</DialogTitle>
                     <Button onClick={handleCopy} size="sm" className="gap-2 bg-primary text-primary-foreground">
                       {isCopied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                      Copy for Email
+                      Copy Rendered
                     </Button>
                   </DialogHeader>
                   <div className="flex-1 w-full bg-white">
@@ -177,44 +183,48 @@ export function TemplateCard({ template, onUpdate, onReset, onDelete }: Template
                 </DialogContent>
               </Dialog>
 
-              <AlertDialog>
-                <AlertDialogTrigger asChild>
-                  <Button 
-                    variant="ghost" 
-                    size="icon" 
-                    className="hover:bg-destructive/10 hover:text-destructive transition-colors h-8 w-8"
-                    title="Delete Template"
-                  >
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
-                </AlertDialogTrigger>
-                <AlertDialogContent className="bg-card border-white/10">
-                  <AlertDialogHeader>
-                    <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-                    <AlertDialogDescription>
-                      This will permanently remove the "{template.title}" template from your vault. This action cannot be undone.
-                    </AlertDialogDescription>
-                  </AlertDialogHeader>
-                  <AlertDialogFooter>
-                    <AlertDialogCancel className="bg-transparent border-white/10">Cancel</AlertDialogCancel>
-                    <AlertDialogAction onClick={() => onDelete(template.id)} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
-                      Delete Template
-                    </AlertDialogAction>
-                  </AlertDialogFooter>
-                </AlertDialogContent>
-              </AlertDialog>
+              {canDelete && (
+                <AlertDialog>
+                  <AlertDialogTrigger asChild>
+                    <Button 
+                      variant="ghost" 
+                      size="icon" 
+                      className="hover:bg-destructive/10 hover:text-destructive transition-colors h-8 w-8"
+                      title="Remove"
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent className="bg-card border-white/10">
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>Permanent Deletion?</AlertDialogTitle>
+                      <AlertDialogDescription>
+                        This action will scrub "{template.title}" from the vault records.
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel className="bg-transparent border-white/10">Cancel</AlertDialogCancel>
+                      <AlertDialogAction onClick={() => onDelete(template.id)} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
+                        Confirm Deletion
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
+              )}
             </>
           )}
 
-          <Button 
-            variant="ghost" 
-            size="icon" 
-            onClick={() => isEditing ? handleCancel() : setIsEditing(true)} 
-            className="hover:bg-primary/10 hover:text-primary transition-colors h-8 w-8"
-            title={isEditing ? "Cancel Changes" : "Edit Template"}
-          >
-            {isEditing ? <X className="h-4 w-4" /> : <Edit3 className="h-4 w-4" />}
-          </Button>
+          {canEdit && (
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              onClick={() => isEditing ? handleCancel() : setIsEditing(true)} 
+              className="hover:bg-primary/10 hover:text-primary transition-colors h-8 w-8"
+              title={isEditing ? "Discard" : "Modify"}
+            >
+              {isEditing ? <X className="h-4 w-4" /> : <Edit3 className="h-4 w-4" />}
+            </Button>
+          )}
         </div>
       </CardHeader>
       
@@ -225,7 +235,6 @@ export function TemplateCard({ template, onUpdate, onReset, onDelete }: Template
             onChange={(e) => setHtmlContent(e.target.value)}
             className="w-full h-full resize-none font-code text-[11px] bg-transparent border-none focus-visible:ring-0 p-6 custom-scrollbar leading-relaxed text-muted-foreground"
             spellCheck={false}
-            placeholder="Paste your HTML here..."
           />
         ) : (
           <div className="w-full h-full overflow-auto custom-scrollbar bg-white rounded-none">
@@ -245,7 +254,7 @@ export function TemplateCard({ template, onUpdate, onReset, onDelete }: Template
             onClick={handleSave} 
             className="flex-1 bg-primary text-primary-foreground hover:bg-primary/90 gap-2 h-10 font-medium"
           >
-            <Save className="h-4 w-4" /> Save Changes
+            <Save className="h-4 w-4" /> Commit Changes
           </Button>
         ) : (
           <Button 
@@ -257,12 +266,12 @@ export function TemplateCard({ template, onUpdate, onReset, onDelete }: Template
           </Button>
         )}
         
-        {!isEditing && (
+        {!isEditing && canEdit && (
           <Button 
             variant="outline" 
             onClick={handleReset} 
             className="bg-transparent border-white/10 hover:bg-destructive/10 hover:text-destructive hover:border-destructive/20 h-10 px-3"
-            title="Reset to Original"
+            title="Reset"
           >
             <RotateCcw className="h-4 w-4" />
           </Button>
