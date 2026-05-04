@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useState, useEffect } from 'react';
@@ -8,14 +9,16 @@ import { Search, LogOut, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Toaster } from "@/components/ui/toaster";
 import Image from 'next/image';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 const STORAGE_KEY = "smic360_vault_data";
-const LOGO_URL = "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1777107241/cropped-SMIC-01-180x180_pffxe7.jpg";
 
 export function Dashboard() {
   const [templates, setTemplates] = useState<EmailTemplate[]>([]);
   const [search, setSearch] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+
+  const logoImage = PlaceHolderImages.find(img => img.id === 'brand-logo');
 
   useEffect(() => {
     const stored = localStorage.getItem(STORAGE_KEY);
@@ -63,13 +66,16 @@ export function Dashboard() {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex items-center gap-4">
             <div className="bg-white p-1 rounded-[6%] ring-1 ring-white/10 overflow-hidden">
-              <Image 
-                src={LOGO_URL} 
-                alt="SMIC360 Logo" 
-                width={40} 
-                height={40} 
-                className="object-contain"
-              />
+              {logoImage && (
+                <Image 
+                  src={logoImage.imageUrl} 
+                  alt="SMIC360 Logo" 
+                  width={40} 
+                  height={40} 
+                  className="object-contain"
+                  data-ai-hint={logoImage.imageHint}
+                />
+              )}
             </div>
             <div>
               <h1 className="text-2xl font-headline font-bold text-foreground">SMIC360 Ltd</h1>

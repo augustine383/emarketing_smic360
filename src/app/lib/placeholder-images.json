@@ -1,0 +1,17 @@
+
+{
+  "placeholderImages": [
+    {
+      "id": "brand-logo",
+      "description": "SMIC360 Ltd Logo",
+      "imageUrl": "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1777107241/cropped-SMIC-01-180x180_pffxe7.jpg",
+      "imageHint": "brand logo"
+    },
+    {
+      "id": "login-bg",
+      "description": "Login Screen Background",
+      "imageUrl": "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1777111208/WhatsApp-Image-2025-08-18-at-14.16.35_e93040d9l_gwfnmu.jpg",
+      "imageHint": "abstract background"
+    }
+  ]
+}
