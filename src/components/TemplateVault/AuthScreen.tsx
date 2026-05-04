@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useState } from 'react';
@@ -29,17 +30,18 @@ export function AuthScreen({ onSuccess }: AuthScreenProps) {
     if (pin.length < 7) return;
 
     setIsSubmitting(true);
+    setError(false);
     
-    // Minor delay to show verification state
-    setTimeout(() => {
-      if (pin === VAULT_PIN) {
-        onSuccess();
-      } else {
+    // Quick validation
+    if (pin === VAULT_PIN) {
+      onSuccess();
+    } else {
+      setTimeout(() => {
         setError(true);
         setPin("");
         setIsSubmitting(false);
-      }
-    }, 400);
+      }, 400);
+    }
   };
 
   return (
@@ -51,25 +53,25 @@ export function AuthScreen({ onSuccess }: AuthScreenProps) {
             src={bgImage.imageUrl} 
             alt="Background" 
             fill 
-            className="object-cover opacity-40 scale-105"
+            className="object-cover opacity-60 scale-105"
             priority
             data-ai-hint={bgImage.imageHint}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/10 via-background/40 to-background" />
-          <div className="absolute inset-0 backdrop-blur-[2px]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/60 to-background" />
+          <div className="absolute inset-0 backdrop-blur-[4px]" />
         </div>
       )}
 
-      <Card className="relative z-10 w-full max-w-md border-none shadow-2xl bg-card/70 backdrop-blur-xl ring-1 ring-white/10">
+      <Card className="relative z-10 w-full max-w-md border-none shadow-2xl bg-card/80 backdrop-blur-2xl ring-1 ring-white/10">
         <CardHeader className="text-center space-y-4 pt-10 pb-6">
-          <div className="mx-auto w-20 h-20 bg-white rounded-[6%] flex items-center justify-center ring-4 ring-primary/5 shadow-xl overflow-hidden">
+          <div className="mx-auto w-24 h-24 bg-white rounded-[6%] flex items-center justify-center ring-4 ring-primary/5 shadow-xl overflow-hidden">
             {logoImage ? (
               <Image 
                 src={logoImage.imageUrl} 
                 alt="SMIC360 Logo" 
-                width={80} 
-                height={80} 
-                className="object-contain p-1"
+                width={96} 
+                height={96} 
+                className="object-contain"
                 data-ai-hint={logoImage.imageHint}
               />
             ) : (
@@ -79,8 +81,8 @@ export function AuthScreen({ onSuccess }: AuthScreenProps) {
             )}
           </div>
           <div className="space-y-2">
-            <CardTitle className="text-3xl font-headline tracking-tight text-foreground">SMIC360 Vault</CardTitle>
-            <CardDescription className="text-muted-foreground/80 font-medium px-4">Enter your 7-digit secure PIN to access the template repository.</CardDescription>
+            <CardTitle className="text-3xl font-headline font-bold tracking-tight text-foreground">SMIC360 Vault</CardTitle>
+            <CardDescription className="text-muted-foreground/90 font-medium px-4">Enter your 7-digit secure PIN to access the repository.</CardDescription>
           </div>
         </CardHeader>
         <CardContent className="space-y-6 pb-12">
