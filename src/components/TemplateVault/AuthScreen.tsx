@@ -42,12 +42,12 @@ export function AuthScreen({ onSuccess }: AuthScreenProps) {
             src={bgImage.imageUrl} 
             alt="Background" 
             fill 
-            className="object-cover opacity-40 scale-105"
+            className="object-cover opacity-60 scale-105"
             priority
             data-ai-hint={bgImage.imageHint}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/60 to-background" />
-          <div className="absolute inset-0 backdrop-blur-[2px]" />
+          <div className="absolute inset-0 backdrop-blur-[4px]" />
         </div>
       )}
 
