@@ -1,11 +1,12 @@
-
 "use client";
 
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Copy, Edit3, Save, RotateCcw, Eye, Maximize2, Check } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Copy, Edit3, Save, RotateCcw, Eye, Maximize2, Check, Trash2, X } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { EmailTemplate } from '@/lib/templates';
 import { Badge } from "@/components/ui/badge";
@@ -16,27 +17,41 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 interface TemplateCardProps {
   template: EmailTemplate;
   onUpdate: (updatedTemplate: EmailTemplate) => void;
   onReset: (id: string) => void;
+  onDelete: (id: string) => void;
 }
 
-export function TemplateCard({ template, onUpdate, onReset }: TemplateCardProps) {
+export function TemplateCard({ template, onUpdate, onReset, onDelete }: TemplateCardProps) {
   const [isEditing, setIsEditing] = useState(false);
+  const [title, setTitle] = useState(template.title);
+  const [category, setCategory] = useState(template.category);
   const [htmlContent, setHtmlContent] = useState(template.html);
   const [isCopied, setIsCopied] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
+    setTitle(template.title);
+    setCategory(template.category);
     setHtmlContent(template.html);
-  }, [template.html]);
+  }, [template]);
 
   const handleCopy = async () => {
     try {
-      // Smart Copy: Attempts to copy as both Rich Text (Rendered) and Plain Text (Source)
-      // This allows pasting directly into Gmail/Outlook as a rendered email.
       const type = "text/html";
       const blob = new Blob([htmlContent], { type });
       const data = [new ClipboardItem({
@@ -51,17 +66,16 @@ export function TemplateCard({ template, onUpdate, onReset }: TemplateCardProps)
 
       toast({
         title: "Template Copied",
-        description: "Ready to paste into Gmail, Outlook, or your code editor.",
+        description: "Ready to paste into Gmail or Outlook.",
       });
     } catch (err) {
-      // Fallback for browsers that don't support ClipboardItem fully
       try {
         await navigator.clipboard.writeText(htmlContent);
         setIsCopied(true);
         setTimeout(() => setIsCopied(false), 2000);
         toast({
           title: "Code Copied",
-          description: "Raw HTML source copied to clipboard.",
+          description: "HTML source copied to clipboard.",
         });
       } catch (fallbackErr) {
         toast({
@@ -74,7 +88,7 @@ export function TemplateCard({ template, onUpdate, onReset }: TemplateCardProps)
   };
 
   const handleSave = () => {
-    onUpdate({ ...template, html: htmlContent });
+    onUpdate({ ...template, title, category, html: htmlContent });
     setIsEditing(false);
     toast({
       title: "Saved",
@@ -87,57 +101,119 @@ export function TemplateCard({ template, onUpdate, onReset }: TemplateCardProps)
     setIsEditing(false);
     toast({
       title: "Reset Complete",
-      description: "Template restored to original SMIC360 standard.",
+      description: "Template restored to original standard.",
     });
+  };
+
+  const handleCancel = () => {
+    setTitle(template.title);
+    setCategory(template.category);
+    setHtmlContent(template.html);
+    setIsEditing(false);
   };
 
   return (
     <Card className="flex flex-col h-full bg-card/40 border-white/5 overflow-hidden ring-1 ring-white/5 hover:ring-white/10 transition-all group">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
-        <div className="space-y-1">
-          <Badge variant="outline" className="text-[10px] uppercase tracking-widest text-primary border-primary/20 bg-primary/5">
-            {template.category}
-          </Badge>
-          <CardTitle className="text-xl font-headline font-semibold text-foreground">{template.title}</CardTitle>
-        </div>
-        <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button 
-                variant="ghost" 
-                size="icon" 
-                className="hover:bg-primary/10 hover:text-primary transition-colors h-8 w-8"
-                title="Full Preview"
-              >
-                <Maximize2 className="h-4 w-4" />
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="max-w-5xl w-[95vw] h-[90vh] flex flex-col p-0 overflow-hidden bg-white border-none">
-              <DialogHeader className="p-4 border-b bg-background flex flex-row items-center justify-between space-y-0">
-                <DialogTitle className="text-foreground">{template.title} - Full Preview</DialogTitle>
-                <Button onClick={handleCopy} size="sm" className="gap-2 bg-primary text-primary-foreground">
-                  {isCopied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                  Copy for Email
-                </Button>
-              </DialogHeader>
-              <div className="flex-1 w-full bg-white">
-                <iframe 
-                  srcDoc={htmlContent} 
-                  title={`${template.title} full preview`}
-                  className="w-full h-full border-none"
+        <div className="space-y-1 flex-1">
+          {!isEditing ? (
+            <>
+              <Badge variant="outline" className="text-[10px] uppercase tracking-widest text-primary border-primary/20 bg-primary/5">
+                {template.category}
+              </Badge>
+              <CardTitle className="text-xl font-headline font-semibold text-foreground line-clamp-1">{template.title}</CardTitle>
+            </>
+          ) : (
+            <div className="space-y-3 pr-4">
+               <div className="space-y-1">
+                <Label className="text-[10px] uppercase text-muted-foreground">Category</Label>
+                <Input 
+                  value={category} 
+                  onChange={(e) => setCategory(e.target.value)} 
+                  className="h-7 text-xs bg-muted/40 border-white/10"
                 />
               </div>
-            </DialogContent>
-          </Dialog>
+              <div className="space-y-1">
+                <Label className="text-[10px] uppercase text-muted-foreground">Title</Label>
+                <Input 
+                  value={title} 
+                  onChange={(e) => setTitle(e.target.value)} 
+                  className="h-8 text-sm font-semibold bg-muted/40 border-white/10"
+                />
+              </div>
+            </div>
+          )}
+        </div>
+        
+        <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity self-start">
+          {!isEditing && (
+            <>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button 
+                    variant="ghost" 
+                    size="icon" 
+                    className="hover:bg-primary/10 hover:text-primary transition-colors h-8 w-8"
+                    title="Full Preview"
+                  >
+                    <Maximize2 className="h-4 w-4" />
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="max-w-5xl w-[95vw] h-[90vh] flex flex-col p-0 overflow-hidden bg-white border-none">
+                  <DialogHeader className="p-4 border-b bg-background flex flex-row items-center justify-between space-y-0">
+                    <DialogTitle className="text-foreground">{template.title} - Preview</DialogTitle>
+                    <Button onClick={handleCopy} size="sm" className="gap-2 bg-primary text-primary-foreground">
+                      {isCopied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                      Copy for Email
+                    </Button>
+                  </DialogHeader>
+                  <div className="flex-1 w-full bg-white">
+                    <iframe 
+                      srcDoc={htmlContent} 
+                      title={`${template.title} full preview`}
+                      className="w-full h-full border-none"
+                    />
+                  </div>
+                </DialogContent>
+              </Dialog>
+
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <Button 
+                    variant="ghost" 
+                    size="icon" 
+                    className="hover:bg-destructive/10 hover:text-destructive transition-colors h-8 w-8"
+                    title="Delete Template"
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent className="bg-card border-white/10">
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                    <AlertDialogDescription>
+                      This will permanently remove the "{template.title}" template from your vault. This action cannot be undone.
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel className="bg-transparent border-white/10">Cancel</AlertDialogCancel>
+                    <AlertDialogAction onClick={() => onDelete(template.id)} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
+                      Delete Template
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
+            </>
+          )}
 
           <Button 
             variant="ghost" 
             size="icon" 
-            onClick={() => setIsEditing(!isEditing)} 
+            onClick={() => isEditing ? handleCancel() : setIsEditing(true)} 
             className="hover:bg-primary/10 hover:text-primary transition-colors h-8 w-8"
-            title={isEditing ? "Show Preview" : "Edit HTML"}
+            title={isEditing ? "Cancel Changes" : "Edit Template"}
           >
-            {isEditing ? <Eye className="h-4 w-4" /> : <Edit3 className="h-4 w-4" />}
+            {isEditing ? <X className="h-4 w-4" /> : <Edit3 className="h-4 w-4" />}
           </Button>
         </div>
       </CardHeader>
@@ -149,6 +225,7 @@ export function TemplateCard({ template, onUpdate, onReset }: TemplateCardProps)
             onChange={(e) => setHtmlContent(e.target.value)}
             className="w-full h-full resize-none font-code text-[11px] bg-transparent border-none focus-visible:ring-0 p-6 custom-scrollbar leading-relaxed text-muted-foreground"
             spellCheck={false}
+            placeholder="Paste your HTML here..."
           />
         ) : (
           <div className="w-full h-full overflow-auto custom-scrollbar bg-white rounded-none">
@@ -179,14 +256,17 @@ export function TemplateCard({ template, onUpdate, onReset }: TemplateCardProps)
             Copy Template
           </Button>
         )}
-        <Button 
-          variant="outline" 
-          onClick={handleReset} 
-          className="bg-transparent border-white/10 hover:bg-destructive/10 hover:text-destructive hover:border-destructive/20 h-10 px-3"
-          title="Reset to Default"
-        >
-          <RotateCcw className="h-4 w-4" />
-        </Button>
+        
+        {!isEditing && (
+          <Button 
+            variant="outline" 
+            onClick={handleReset} 
+            className="bg-transparent border-white/10 hover:bg-destructive/10 hover:text-destructive hover:border-destructive/20 h-10 px-3"
+            title="Reset to Original"
+          >
+            <RotateCcw className="h-4 w-4" />
+          </Button>
+        )}
       </CardFooter>
     </Card>
   );

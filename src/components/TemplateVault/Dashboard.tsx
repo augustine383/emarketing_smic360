@@ -4,18 +4,20 @@ import React, { useState, useEffect } from 'react';
 import { DEFAULT_TEMPLATES, EmailTemplate } from '@/lib/templates';
 import { TemplateCard } from './TemplateCard';
 import { Input } from "@/components/ui/input";
-import { Search, LogOut } from "lucide-react";
+import { Search, LogOut, Plus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Toaster } from "@/components/ui/toaster";
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { useToast } from "@/hooks/use-toast";
 
-const STORAGE_KEY = "smic360_vault_data";
+const STORAGE_KEY = "smic360_vault_data_v2";
 
 export function Dashboard() {
   const [templates, setTemplates] = useState<EmailTemplate[]>([]);
   const [search, setSearch] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const { toast } = useToast();
 
   const logoImage = PlaceHolderImages.find(img => img.id === 'brand-logo');
 
@@ -48,6 +50,45 @@ export function Dashboard() {
     if (original) {
       setTemplates(prev => prev.map(t => t.id === id ? original : t));
     }
+  };
+
+  const handleDelete = (id: string) => {
+    setTemplates(prev => prev.filter(t => t.id !== id));
+    toast({
+      title: "Template Removed",
+      description: "The template has been deleted from the vault.",
+      variant: "destructive",
+    });
+  };
+
+  const handleAddTemplate = () => {
+    const newTemplate: EmailTemplate = {
+      id: crypto.randomUUID(),
+      title: "New Template",
+      category: "Uncategorized",
+      html: `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body { background-color: #050505; font-family: sans-serif; padding: 40px; color: #888; text-align: center; }
+    .card { max-width: 600px; margin: 0 auto; background: #0C0C0C; border: 1px solid #C9963A; padding: 40px; }
+    h1 { color: #C9963A; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>New SMIC360 Template</h1>
+    <p>Start building your custom content here.</p>
+  </div>
+</body>
+</html>`
+    };
+    setTemplates(prev => [newTemplate, ...prev]);
+    toast({
+      title: "Template Created",
+      description: "A new blank template has been added to your vault.",
+    });
   };
 
   const filteredTemplates = templates.filter(t => 
@@ -83,15 +124,21 @@ export function Dashboard() {
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="relative group flex-1 md:w-80">
+            <div className="relative group flex-1 md:w-64">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground group-focus-within:text-primary transition-colors" />
               <Input 
-                placeholder="Search templates..." 
+                placeholder="Search vault..." 
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 className="pl-10 bg-muted/30 border-none ring-1 ring-white/10 focus-visible:ring-primary h-10 text-sm"
               />
             </div>
+            
+            <Button onClick={handleAddTemplate} className="gap-2 bg-primary text-primary-foreground font-semibold">
+              <Plus className="w-4 h-4" />
+              New Template
+            </Button>
+
             <Button variant="ghost" size="icon" onClick={handleLogout} className="text-muted-foreground hover:text-accent hover:bg-accent/10 h-10 w-10">
               <LogOut className="w-5 h-5" />
             </Button>
@@ -107,6 +154,7 @@ export function Dashboard() {
               template={template} 
               onUpdate={handleUpdate}
               onReset={handleReset}
+              onDelete={handleDelete}
             />
           ))}
           {filteredTemplates.length === 0 && (
