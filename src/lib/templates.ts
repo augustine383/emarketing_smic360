@@ -16,30 +16,36 @@ export const DEFAULT_TEMPLATES: EmailTemplate[] = [
     html: `<!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,700;1,400&family=DM+Sans:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }
-    .container { max-width: 600px; margin: 40px auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-    .header { background-color: #1F1C17; padding: 30px; text-align: center; color: #CCB94D; }
-    .logo { width: 60px; height: 60px; border-radius: 6%; margin-bottom: 15px; }
-    .content { padding: 40px; color: #333333; line-height: 1.6; }
-    .footer { background-color: #f9f9f9; padding: 20px; text-align: center; font-size: 12px; color: #999999; }
-    .button { display: inline-block; padding: 12px 24px; background-color: #CCB94D; color: #1F1C17; text-decoration: none; border-radius: 4px; font-weight: bold; margin-top: 20px; }
+    body { margin: 0; padding: 0; background-color: #050505; font-family: 'DM Sans', sans-serif; }
+    .outer { background-color: #050505; padding: 40px 20px; }
+    .card { max-width: 600px; margin: 0 auto; background-color: #0C0C0C; border: 1px solid rgba(201,150,58,0.15); overflow: hidden; }
+    .header { padding: 40px; text-align: center; border-bottom: 1px solid rgba(201,150,58,0.1); }
+    .logo { width: 80px; height: 80px; border-radius: 6%; margin-bottom: 20px; }
+    .content { padding: 40px; text-align: center; color: #F5F0E8; }
+    .h1 { font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 300; margin: 0 0 20px; line-height: 1.1; }
+    .h1 em { font-style: italic; color: #C9963A; }
+    .body { font-size: 15px; line-height: 1.8; color: #888; margin-bottom: 30px; }
+    .btn { display: inline-block; background: linear-gradient(135deg, #C9963A, #E8C06A); color: #080808; padding: 16px 40px; text-decoration: none; font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; }
+    .footer { padding: 30px; text-align: center; color: #444; font-size: 10px; letter-spacing: 0.1em; border-top: 1px solid rgba(201,150,58,0.05); }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <img src="${LOGO_URL}" alt="SMIC360" class="logo">
-      <h1>Welcome to SMIC360 Ltd</h1>
-    </div>
-    <div class="content">
-      <h2>Hello there!</h2>
-      <p>We're thrilled to have you join SMIC360 Ltd. You're now part of an exclusive group dedicated to excellence in communication.</p>
-      <p>Explore your dashboard to see what we've prepared for you.</p>
-      <a href="#" class="button">Get Started</a>
-    </div>
-    <div class="footer">
-      &copy; 2024 SMIC360 Ltd. All rights reserved.
+  <div class="outer">
+    <div class="card">
+      <div class="header">
+        <img src="${LOGO_URL}" alt="SMIC360" class="logo">
+      </div>
+      <div class="content">
+        <h1 class="h1">Welcome to the <em>Inner Circle</em></h1>
+        <p class="body">You have successfully joined SMIC360 Ltd. We are dedicated to providing the world's most refined communication tools, tailored for excellence.</p>
+        <a href="#" class="btn">Access the Vault</a>
+      </div>
+      <div class="footer">
+        &copy; 2024 SMIC360 Ltd. Professional Solutions &bull; Exclusive Member Access
+      </div>
     </div>
   </div>
 </body>
@@ -52,27 +58,38 @@ export const DEFAULT_TEMPLATES: EmailTemplate[] = [
     html: `<!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,700;1,400&family=DM+Sans:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
-    body { font-family: sans-serif; margin: 0; padding: 0; background: #fafafa; }
-    .card { max-width: 550px; margin: 20px auto; background: white; border: 1px solid #eee; }
-    .header-img { background: #1F1C17; height: 120px; display: flex; align-items: center; justify-content: center; padding: 20px; }
-    .logo { width: 80px; height: 80px; border-radius: 6%; border: 2px solid #CCB94D; }
-    .body-text { padding: 30px; }
-    .tag { background: #E87E46; color: white; padding: 4px 8px; border-radius: 3px; font-size: 12px; font-weight: bold; }
+    body { margin: 0; padding: 0; background-color: #050505; font-family: 'DM Sans', sans-serif; }
+    .outer { background-color: #050505; padding: 40px 20px; }
+    .card { max-width: 600px; margin: 0 auto; background-color: #0C0C0C; border: 1px solid rgba(201,150,58,0.15); }
+    .ticker { background: #C9963A; padding: 8px; text-align: center; font-size: 9px; font-weight: 700; letter-spacing: 0.3em; color: #080808; text-transform: uppercase; }
+    .hero { position: relative; height: 240px; background: #111; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .logo-bg { position: absolute; width: 120%; opacity: 0.05; filter: grayscale(1); }
+    .content { padding: 48px; color: #F5F0E8; }
+    .label { color: #C9963A; font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase; margin-bottom: 12px; display: block; }
+    .h2 { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; margin: 0 0 16px; }
+    .body { color: #888; font-size: 14px; line-height: 1.8; margin-bottom: 24px; }
+    .feature { border-left: 1px solid #C9963A; padding-left: 20px; margin: 20px 0; color: #aaa; font-style: italic; }
   </style>
 </head>
 <body>
-  <div class="card">
-    <div class="header-img">
-      <img src="${LOGO_URL}" alt="SMIC360" class="logo">
-    </div>
-    <div class="body-text">
-      <span class="tag">NEW UPDATE</span>
-      <h1 style="margin-top: 15px;">SMIC360 Ltd Version 2.0</h1>
-      <p>We've completely redesigned the interface to bring you a more fluid and intuitive experience. Check out the new dark mode features and enhanced collaboration tools.</p>
-      <p>Our team at SMIC360 Ltd has worked tirelessly to improve performance across the board.</p>
-      <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;">
-      <p style="font-size: 14px; color: #666;">View the full release notes on our blog.</p>
+  <div class="outer">
+    <div class="card">
+      <div class="ticker">Release Notes &bull; Version 2.4.0</div>
+      <div class="hero">
+        <img src="${LOGO_URL}" alt="SMIC360" style="width: 80px; z-index: 10; border-radius: 6%;">
+      </div>
+      <div class="content">
+        <span class="label">Evolution</span>
+        <h2 class="h2">The Future is <em>Seamless</em></h2>
+        <p class="body">We have refined the core engine of SMIC360 Ltd. Experience faster processing, enhanced security protocols, and our new dark interface designed for focus.</p>
+        <div class="feature">
+          "The most significant upgrade in our history, bringing unparalleled precision to your daily operations."
+        </div>
+        <p class="body">Update now to access the next generation of professional tools.</p>
+      </div>
     </div>
   </div>
 </body>
@@ -85,48 +102,57 @@ export const DEFAULT_TEMPLATES: EmailTemplate[] = [
     html: `<!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    .invoice-box { max-width: 800px; margin: auto; padding: 30px; border: 1px solid #eee; font-size: 16px; line-height: 24px; font-family: 'Helvetica', 'Arial', sans-serif; color: #555; }
-    .invoice-box table { width: 100%; line-height: inherit; text-align: left; }
-    .invoice-box table td { padding: 5px; vertical-align: top; }
-    .invoice-box table tr.top table td { padding-bottom: 20px; }
-    .logo { width: 50px; height: 50px; border-radius: 6%; vertical-align: middle; margin-right: 10px; }
-    .invoice-box table tr.heading td { background: #eee; border-bottom: 1px solid #ddd; font-weight: bold; }
-    .invoice-box table tr.item td { border-bottom: 1px solid #eee; }
-    .invoice-box table tr.total td:nth-child(2) { border-top: 2px solid #eee; font-weight: bold; }
+    body { background: #050505; font-family: 'DM Sans', sans-serif; color: #888; margin: 0; padding: 0; }
+    .outer { padding: 40px 20px; }
+    .invoice { max-width: 700px; margin: 0 auto; background: #0C0C0C; border: 1px solid rgba(201,150,58,0.15); padding: 50px; }
+    .header { border-bottom: 1px solid rgba(201,150,58,0.1); padding-bottom: 30px; margin-bottom: 40px; }
+    .logo { width: 50px; border-radius: 6%; float: left; }
+    .brand { float: left; margin-left: 15px; font-family: 'Cormorant Garamond', serif; font-size: 24px; color: #C9963A; padding-top: 10px; }
+    .invoice-id { float: right; text-align: right; font-size: 11px; letter-spacing: 0.1em; padding-top: 15px; }
+    .clear { clear: both; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th { text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em; color: #555; padding-bottom: 15px; border-bottom: 1px solid #1a1a1a; }
+    td { padding: 20px 0; border-bottom: 1px solid #111; color: #aaa; font-size: 14px; }
+    .total-row td { border: none; color: #F5F0E8; font-size: 18px; font-family: 'Cormorant Garamond', serif; padding-top: 30px; }
   </style>
 </head>
 <body>
-  <div class="invoice-box">
-    <table cellpadding="0" cellspacing="0">
-      <tr class="top">
-        <td colspan="2">
-          <table>
-            <tr>
-              <td class="title" style="font-size: 35px; color: #1F1C17; font-weight: bold;">
-                <img src="${LOGO_URL}" alt="Logo" class="logo">
-                SMIC360
-              </td>
-              <td style="text-align: right;">Invoice #: 123<br>Created: May 20, 2024</td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-      <tr class="heading">
-        <td>Item</td>
-        <td>Price</td>
-      </tr>
-      <tr class="item">
-        <td>Premium Monthly Subscription</td>
-        <td>$49.00</td>
-      </tr>
-      <tr class="total">
-        <td></td>
-        <td>Total: $49.00</td>
-      </tr>
-    </table>
-    <div style="margin-top: 40px; text-align: center; color: #999; font-size: 12px;">
-      SMIC360 Ltd, Professional Solutions
+  <div class="outer">
+    <div class="invoice">
+      <div class="header">
+        <img src="${LOGO_URL}" class="logo">
+        <div class="brand">SMIC360 Ltd</div>
+        <div class="invoice-id">INVOICE #0824-A9<br>AUGUST 24, 2024</div>
+        <div class="clear"></div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th style="text-align: right;">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Premium Enterprise Vault Subscription (Monthly)</td>
+            <td style="text-align: right;">$499.00</td>
+          </tr>
+          <tr>
+            <td>API Dedicated Priority Support</td>
+            <td style="text-align: right;">$150.00</td>
+          </tr>
+          <tr class="total-row">
+            <td style="color: #555; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">Total Due</td>
+            <td style="text-align: right; color: #C9963A;">$649.00 USD</td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="margin-top: 60px; text-align: center; font-size: 9px; letter-spacing: 0.2em; color: #333; text-transform: uppercase;">
+        Thank you for choosing SMIC360 Excellence
+      </div>
     </div>
   </div>
 </body>
@@ -138,13 +164,25 @@ export const DEFAULT_TEMPLATES: EmailTemplate[] = [
     category: 'Security',
     html: `<!DOCTYPE html>
 <html>
-<body style="background: #f0f0f0; padding: 50px; font-family: Arial, sans-serif;">
-  <div style="background: #fff; padding: 30px; max-width: 400px; margin: auto; border-radius: 10px; text-align: center;">
-    <img src="${LOGO_URL}" alt="SMIC360" style="width: 60px; height: 60px; border-radius: 6%; margin-bottom: 20px;">
-    <h2 style="color: #333;">Reset Your Password</h2>
-    <p style="color: #666;">We received a request to reset your SMIC360 Ltd password. If you didn't make this request, just ignore this email.</p>
-    <a href="#" style="background: #E87E46; color: white; padding: 15px 25px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 20px;">Reset Password</a>
-    <p style="font-size: 12px; color: #aaa; margin-top: 30px;">Button not working? Copy this link: https://smic360.app/reset/token123</p>
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    body { background: #050505; font-family: 'DM Sans', sans-serif; margin: 0; padding: 0; }
+    .card { max-width: 450px; margin: 60px auto; background: #0C0C0C; border: 1px solid rgba(201,150,58,0.2); padding: 50px; text-align: center; }
+    .logo { width: 60px; border-radius: 6%; margin-bottom: 30px; border: 1px solid rgba(201,150,58,0.2); }
+    .h2 { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 300; color: #F5F0E8; margin-bottom: 20px; }
+    .body { font-size: 14px; color: #666; line-height: 1.7; margin-bottom: 30px; }
+    .btn { display: inline-block; background: #000; color: #C9963A; border: 1px solid #C9963A; padding: 14px 30px; text-decoration: none; font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img src="${LOGO_URL}" class="logo">
+    <h2 class="h2">Security <em>Verification</em></h2>
+    <p class="body">A request has been made to access your SMIC360 Ltd account credentials. If this was you, please authorize the reset below.</p>
+    <a href="#" class="btn">Confirm Identity</a>
+    <p style="margin-top: 40px; font-size: 10px; color: #333; letter-spacing: 0.05em;">Authorized Session Only</p>
   </div>
 </body>
 </html>`
@@ -156,30 +194,39 @@ export const DEFAULT_TEMPLATES: EmailTemplate[] = [
     html: `<!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
   <style>
-    .news-card { border: 1px solid #ddd; padding: 20px; font-family: Georgia, serif; }
-    .header { font-size: 32px; border-bottom: 3px double #333; padding-bottom: 10px; text-align: center; }
-    .logo { width: 40px; height: 40px; border-radius: 6%; vertical-align: middle; margin-bottom: 10px; }
-    .article { margin: 20px 0; }
-    .article-title { font-weight: bold; font-size: 20px; }
+    body { background: #050505; font-family: 'DM Sans', sans-serif; margin: 0; padding: 0; }
+    .container { max-width: 650px; margin: 0 auto; background: #0C0C0C; border: 1px solid rgba(201,150,58,0.1); }
+    .header { padding: 50px 40px; text-align: center; background: #080808; }
+    .brand-name { font-family: 'Cormorant Garamond', serif; font-size: 36px; color: #F5F0E8; letter-spacing: 0.1em; margin-bottom: 5px; }
+    .issue { font-size: 9px; color: #C9963A; letter-spacing: 0.4em; text-transform: uppercase; }
+    .article { padding: 40px; border-bottom: 1px solid #111; }
+    .cat { font-size: 9px; color: #555; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px; display: block; }
+    .title { font-family: 'Cormorant Garamond', serif; font-size: 28px; color: #F5F0E8; line-height: 1.3; margin-bottom: 15px; font-weight: 300; }
+    .excerpt { font-size: 14px; color: #888; line-height: 1.8; margin-bottom: 20px; }
+    .link { color: #C9963A; text-decoration: none; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; }
   </style>
 </head>
 <body>
-  <div class="news-card">
+  <div class="container">
     <div class="header">
-      <img src="${LOGO_URL}" alt="SMIC360" class="logo"><br>
-      SMIC360 INSIGHTS
+      <img src="${LOGO_URL}" style="width:40px; border-radius:6%; margin-bottom:15px;">
+      <div class="brand-name">SMIC360 <em>Insights</em></div>
+      <div class="issue">Issue No. 124 &bull; Volume 4</div>
     </div>
     <div class="article">
-      <div class="article-title">Why Minimalist Design is the Future</div>
-      <p>Experts at SMIC360 Ltd suggest that reducing visual clutter is key to increasing user engagement in 2024...</p>
+      <span class="cat">Vision</span>
+      <h3 class="title">The Art of Minimalist <em>Efficiency</em></h3>
+      <p class="excerpt">In a world of noise, clarity is the ultimate luxury. Our experts explore how structural simplicity leads to operational mastery in high-stakes environments...</p>
+      <a href="#" class="link">Read Article &rarr;</a>
     </div>
     <div class="article">
-      <div class="article-title">The Art of the Email Subject Line</div>
-      <p>How a few words can determine the success of your entire campaign...</p>
-    </div>
-    <div style="text-align: center; margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px; color: #777; font-size: 11px;">
-      &copy; 2024 SMIC360 Ltd. All rights reserved.
+      <span class="cat">Market</span>
+      <h3 class="title">Precision in the Age of <em>Complexity</em></h3>
+      <p class="excerpt">A deep dive into the evolving landscape of professional digital infrastructure and why SMIC360 Ltd remains the benchmark for security.</p>
+      <a href="#" class="link">Read Article &rarr;</a>
     </div>
   </div>
 </body>
