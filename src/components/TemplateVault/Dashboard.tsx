@@ -62,7 +62,7 @@ export function Dashboard() {
       <header className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-md border-b border-white/5 py-4 px-6 md:px-10">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex items-center gap-4">
-            <div className="bg-white p-1 rounded-lg ring-1 ring-white/10 overflow-hidden">
+            <div className="bg-white p-1 rounded-[6%] ring-1 ring-white/10 overflow-hidden">
               <Image 
                 src={LOGO_URL} 
                 alt="SMIC360 Logo" 

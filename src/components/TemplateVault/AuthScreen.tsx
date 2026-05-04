@@ -33,7 +33,7 @@ export function AuthScreen({ onSuccess }: AuthScreenProps) {
     <div className="min-h-screen flex items-center justify-center bg-background p-6">
       <Card className="w-full max-w-md border-none shadow-2xl bg-card/50 backdrop-blur-xl ring-1 ring-white/5">
         <CardHeader className="text-center space-y-4 pt-10 pb-6">
-          <div className="mx-auto w-20 h-20 bg-white rounded-full flex items-center justify-center ring-4 ring-primary/5 overflow-hidden">
+          <div className="mx-auto w-20 h-20 bg-white rounded-[6%] flex items-center justify-center ring-4 ring-primary/5 overflow-hidden">
             <Image 
               src={LOGO_URL} 
               alt="SMIC360 Logo" 
