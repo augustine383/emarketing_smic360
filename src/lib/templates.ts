@@ -739,6 +739,16 @@ export const DEFAULT_TEMPLATES: EmailTemplate[] = [
   },
 ];
 
+// ─── IMAGE URLs ──────────────────────────────────────────────────────────────
+
+const LOGO_CLOUD = "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1777107241/cropped-SMIC-01-180x180_pffxe7.jpg";
+const HERO_IMG = "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1777865846/WhatsApp_Image_2026-05-03_at_7.41.12_PM_3_udwvxo.jpg";
+const TEAM_IMG = "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1778495883/sa_xpfeca.jpg";
+const RE_IMG = "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1777196963/1_j6fe4u.jpg";
+const PROC_IMG = "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1777872031/PROCURE_cmjr84.jpg";
+const BRANDS_IMG = "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1778496968/xcz_o35zcw.jpg";
+const CTA_BG = "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1778495883/sd_akkqko.jpg";
+
 // ─── GENERATE HTML ───────────────────────────────────────────────────────────
 
 DEFAULT_TEMPLATES.forEach(t => {
@@ -850,14 +860,6 @@ function rSystemAlert(v: Record<string, string>): string {
 function rPasswordReset(v: Record<string, string>): string {
   return `<!DOCTYPE html><html><head>${HEAD}<style>${BASE_CSS}.outer{background:${SMIC.bg};padding:40px 20px}.card{${CARD}}.header{padding:40px;text-align:center;border-bottom:1px solid ${SMIC.borderLight}}.content{padding:40px;text-align:center;color:${SMIC.text}}.h1{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:300;margin:0 0 20px;line-height:1.1}.h1 em{font-style:italic;color:${SMIC.gold}}.body{font-size:15px;line-height:1.8;color:${SMIC.muted};margin-bottom:30px}.btn{${GOLD_BTN}}.note{margin-top:24px;font-size:11px;color:${SMIC.dim};line-height:1.6}.footer{${FOOTER}}</style></head><body><div class="outer"><div class="card"><div class="header">${logoBlock()}</div><div class="content"><h1 class="h1">${v.heading || ''}</h1><p class="body">${v.body || ''}</p>${v.cta ? `<a href="${v.ctaUrl || '#'}" class="btn">${v.cta}</a>` : ''}${v.note ? `<div class="note">${v.note}</div>` : ''}</div>${footer()}</div></div></body></html>`;
 }
-
-const LOGO_CLOUD = "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1777107241/cropped-SMIC-01-180x180_pffxe7.jpg";
-const HERO_IMG = "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1777865846/WhatsApp_Image_2026-05-03_at_7.41.12_PM_3_udwvxo.jpg";
-const TEAM_IMG = "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1778495883/sa_xpfeca.jpg";
-const RE_IMG = "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1777196963/1_j6fe4u.jpg";
-const PROC_IMG = "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1777872031/PROCURE_cmjr84.jpg";
-const BRANDS_IMG = "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1778496968/xcz_o35zcw.jpg";
-const CTA_BG = "https://res.cloudinary.com/dwsl2ktt2/image/upload/v1778495883/sd_akkqko.jpg";
 
 function rCompanyProfileFull(v: Record<string, string>): string {
   return `<!DOCTYPE html><html lang="en"><head>${HEAD}<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"><style>body{margin:0;padding:0;background:#000;font-family:'DM Sans',Arial,sans-serif;-webkit-font-smoothing:antialiased}img{max-width:100%;height:auto}</style></head><body>
