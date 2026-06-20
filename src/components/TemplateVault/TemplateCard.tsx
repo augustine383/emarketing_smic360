@@ -4,21 +4,12 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Copy, Edit3, Save, RotateCcw, Maximize2, Check, Trash2, X } from "lucide-react";
+import { Copy, Edit3, Maximize2, Check, Trash2, Mail, Code, CopyPlus } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { EmailTemplate } from '@/lib/templates';
+import { toGmailHtml } from '@/lib/gmail';
 import { Badge } from "@/components/ui/badge";
 import { UserAccount } from '@/lib/auth';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -37,245 +28,166 @@ interface TemplateCardProps {
   onUpdate: (updatedTemplate: EmailTemplate) => void;
   onReset: (id: string) => void;
   onDelete: (id: string) => void;
+  onDuplicate: (template: EmailTemplate) => void;
+  onSelect?: () => void;
 }
 
-export function TemplateCard({ template, currentUser, onUpdate, onReset, onDelete }: TemplateCardProps) {
-  const [isEditing, setIsEditing] = useState(false);
-  const [title, setTitle] = useState(template.title);
-  const [category, setCategory] = useState(template.category);
-  const [htmlContent, setHtmlContent] = useState(template.html);
+export function TemplateCard({ template, currentUser, onUpdate, onReset, onDelete, onDuplicate, onSelect }: TemplateCardProps) {
   const [isCopied, setIsCopied] = useState(false);
+  const [isGmailCopied, setIsGmailCopied] = useState(false);
   const { toast } = useToast();
 
-  const canEdit = currentUser.role === 'Admin' || currentUser.role === 'Manager';
   const canDelete = currentUser.role === 'Admin';
 
-  useEffect(() => {
-    setTitle(template.title);
-    setCategory(template.category);
-    setHtmlContent(template.html);
-  }, [template]);
-
-  const handleCopy = async () => {
+  const handleCopyGmail = async (e: React.MouseEvent) => {
+    e.stopPropagation();
     try {
+      const gmailHtml = toGmailHtml(template.html);
       const type = "text/html";
-      const blob = new Blob([htmlContent], { type });
+      const blob = new Blob([gmailHtml], { type });
       const data = [new ClipboardItem({
         [type]: blob,
-        "text/plain": new Blob([htmlContent], { type: "text/plain" })
+        "text/plain": new Blob([gmailHtml], { type: "text/plain" })
       })];
-      
       await navigator.clipboard.write(data);
-      
-      setIsCopied(true);
-      setTimeout(() => setIsCopied(false), 2000);
-
-      toast({
-        title: "Success",
-        description: "Template copied for direct paste into email client.",
-      });
-    } catch (err) {
+      setIsGmailCopied(true);
+      setTimeout(() => setIsGmailCopied(false), 2000);
+      toast({ title: "Copied for Gmail", description: `${template.title} is ready to paste into Gmail compose.` });
+    } catch {
       try {
-        await navigator.clipboard.writeText(htmlContent);
-        setIsCopied(true);
-        setTimeout(() => setIsCopied(false), 2000);
-        toast({
-          title: "Code Copied",
-          description: "HTML source copied to clipboard.",
-        });
-      } catch (fallbackErr) {
-        toast({
-          title: "Error",
-          description: "Clipboard access denied.",
-          variant: "destructive",
-        });
+        const gmailHtml = toGmailHtml(template.html);
+        await navigator.clipboard.writeText(gmailHtml);
+        setIsGmailCopied(true);
+        setTimeout(() => setIsGmailCopied(false), 2000);
+        toast({ title: "Copied for Gmail", description: `${template.title} HTML copied. Paste into Gmail compose.` });
+      } catch {
+        toast({ title: "Error", description: "Clipboard access denied.", variant: "destructive" });
       }
     }
   };
 
-  const handleSave = () => {
-    onUpdate({ ...template, title, category, html: htmlContent });
-    setIsEditing(false);
-    toast({
-      title: "Success",
-      description: "Changes committed to vault storage.",
-    });
-  };
-
-  const handleReset = () => {
-    onReset(template.id);
-    setIsEditing(false);
-    toast({
-      title: "Reset",
-      description: "Restored to factory standard.",
-    });
-  };
-
-  const handleCancel = () => {
-    setTitle(template.title);
-    setCategory(template.category);
-    setHtmlContent(template.html);
-    setIsEditing(false);
+  const handleCopyRaw = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    try {
+      const type = "text/html";
+      const blob = new Blob([template.html], { type });
+      const data = [new ClipboardItem({
+        [type]: blob,
+        "text/plain": new Blob([template.html], { type: "text/plain" })
+      })];
+      await navigator.clipboard.write(data);
+      setIsCopied(true);
+      setTimeout(() => setIsCopied(false), 2000);
+      toast({ title: "HTML Source Copied", description: `${template.title} raw HTML source copied.` });
+    } catch {
+      try {
+        await navigator.clipboard.writeText(template.html);
+        setIsCopied(true);
+        setTimeout(() => setIsCopied(false), 2000);
+        toast({ title: "HTML Source Copied", description: `${template.title} raw HTML copied as text.` });
+      } catch {
+        toast({ title: "Error", description: "Clipboard access denied.", variant: "destructive" });
+      }
+    }
   };
 
   return (
-    <Card className="flex flex-col h-full bg-card/40 border-white/5 overflow-hidden ring-1 ring-white/5 hover:ring-white/10 transition-all group">
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
-        <div className="space-y-1 flex-1">
-          {!isEditing ? (
-            <>
-              <Badge variant="outline" className="text-[10px] uppercase tracking-widest text-primary border-primary/20 bg-primary/5">
-                {template.category}
-              </Badge>
-              <CardTitle className="text-xl font-headline font-semibold text-foreground line-clamp-1">{template.title}</CardTitle>
-            </>
-          ) : (
-            <div className="space-y-3 pr-4">
-               <div className="space-y-1">
-                <Label className="text-[10px] uppercase text-muted-foreground">Category</Label>
-                <Input 
-                  value={category} 
-                  onChange={(e) => setCategory(e.target.value)} 
-                  className="h-7 text-xs bg-muted/40 border-white/10"
-                />
-              </div>
-              <div className="space-y-1">
-                <Label className="text-[10px] uppercase text-muted-foreground">Title</Label>
-                <Input 
-                  value={title} 
-                  onChange={(e) => setTitle(e.target.value)} 
-                  className="h-8 text-sm font-semibold bg-muted/40 border-white/10"
-                />
-              </div>
-            </div>
-          )}
+    <Card
+      className="flex flex-col h-full bg-[#161b22] border border-slate-700/30 overflow-hidden hover:border-cyan-500/30 transition-all duration-300 group relative cursor-pointer"
+      onClick={onSelect}
+    >
+      {/* Glow effect on hover */}
+      <div className="absolute -inset-px bg-gradient-to-r from-cyan-500/0 via-cyan-500/5 to-emerald-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg pointer-events-none" />
+
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3 relative">
+        <div className="space-y-1.5 flex-1 min-w-0">
+          <Badge variant="outline" className="text-[9px] uppercase tracking-[0.2em] font-mono text-cyan-400 border-cyan-500/20 bg-cyan-500/5">
+            {template.category}
+          </Badge>
+          <CardTitle className="text-sm font-semibold text-white truncate">{template.title}</CardTitle>
         </div>
-        
-        <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity self-start">
-          {!isEditing && (
-            <>
-              <Dialog>
-                <DialogTrigger asChild>
-                  <Button 
-                    variant="ghost" 
-                    size="icon" 
-                    className="hover:bg-primary/10 hover:text-primary transition-colors h-8 w-8"
-                    title="Full Preview"
-                  >
-                    <Maximize2 className="h-4 w-4" />
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="max-w-5xl w-[95vw] h-[90vh] flex flex-col p-0 overflow-hidden bg-white border-none">
-                  <DialogHeader className="p-4 border-b bg-background flex flex-row items-center justify-between space-y-0">
-                    <DialogTitle className="text-foreground">{template.title} - Preview</DialogTitle>
-                    <Button onClick={handleCopy} size="sm" className="gap-2 bg-primary text-primary-foreground">
-                      {isCopied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                      Copy Rendered
-                    </Button>
-                  </DialogHeader>
-                  <div className="flex-1 w-full bg-white">
-                    <iframe 
-                      srcDoc={htmlContent} 
-                      title={`${template.title} full preview`}
-                      className="w-full h-full border-none"
-                    />
-                  </div>
-                </DialogContent>
-              </Dialog>
 
-              {canDelete && (
-                <AlertDialog>
-                  <AlertDialogTrigger asChild>
-                    <Button 
-                      variant="ghost" 
-                      size="icon" 
-                      className="hover:bg-destructive/10 hover:text-destructive transition-colors h-8 w-8"
-                      title="Remove"
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </Button>
-                  </AlertDialogTrigger>
-                  <AlertDialogContent className="bg-card border-white/10">
-                    <AlertDialogHeader>
-                      <AlertDialogTitle>Permanent Deletion?</AlertDialogTitle>
-                      <AlertDialogDescription>
-                        This action will scrub "{template.title}" from the vault records.
-                      </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                      <AlertDialogCancel className="bg-transparent border-white/10">Cancel</AlertDialogCancel>
-                      <AlertDialogAction onClick={() => onDelete(template.id)} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
-                        Confirm Deletion
-                      </AlertDialogAction>
-                    </AlertDialogFooter>
-                  </AlertDialogContent>
-                </AlertDialog>
-              )}
-            </>
+        <div className="flex gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity self-start">
+          <Button
+            variant="ghost" size="icon"
+            onClick={(e) => { e.stopPropagation(); onDuplicate(template); }}
+            className="hover:bg-cyan-400/10 hover:text-cyan-400 transition-colors h-7 w-7"
+            title="Duplicate"
+          >
+            <CopyPlus className="h-3.5 w-3.5" />
+          </Button>
+          {canDelete && (
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button
+                  variant="ghost" size="icon"
+                  className="hover:bg-red-400/10 hover:text-red-400 transition-colors h-7 w-7"
+                  title="Remove"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <Trash2 className="h-3.5 w-3.5" />
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent className="bg-[#161b22] border border-slate-700/50">
+                <AlertDialogHeader>
+                  <AlertDialogTitle className="text-sm text-white font-semibold">Permanent Deletion?</AlertDialogTitle>
+                  <AlertDialogDescription className="text-xs text-slate-400 font-mono">
+                    This will remove &quot;{template.title}&quot; from the vault records.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel className="bg-transparent border border-slate-700/50 text-slate-400 font-mono text-xs h-8">Cancel</AlertDialogCancel>
+                  <AlertDialogAction onClick={() => onDelete(template.id)} className="bg-red-500 text-white font-mono text-xs h-8 hover:bg-red-600">
+                    Confirm
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           )}
-
-          {canEdit && (
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              onClick={() => isEditing ? handleCancel() : setIsEditing(true)} 
-              className="hover:bg-primary/10 hover:text-primary transition-colors h-8 w-8"
-              title={isEditing ? "Discard" : "Modify"}
-            >
-              {isEditing ? <X className="h-4 w-4" /> : <Edit3 className="h-4 w-4" />}
-            </Button>
-          )}
+          <Button
+            variant="ghost" size="icon"
+            className="hover:bg-cyan-400/10 hover:text-cyan-400 transition-colors h-7 w-7"
+            title="Open Template"
+            onClick={(e) => { e.stopPropagation(); onSelect?.(); }}
+          >
+            <Maximize2 className="h-3.5 w-3.5" />
+          </Button>
         </div>
       </CardHeader>
-      
-      <CardContent className="flex-1 min-h-[350px] max-h-[450px] overflow-hidden p-0 border-y border-white/5 relative bg-muted/5">
-        {isEditing ? (
-          <Textarea 
-            value={htmlContent}
-            onChange={(e) => setHtmlContent(e.target.value)}
-            className="w-full h-full resize-none font-code text-[11px] bg-transparent border-none focus-visible:ring-0 p-6 custom-scrollbar leading-relaxed text-muted-foreground"
-            spellCheck={false}
+
+      <CardContent className="flex-1 min-h-[280px] max-h-[380px] overflow-hidden p-0 border-y border-slate-700/20 relative bg-[#0d1117] group/preview">
+        <div className="w-full h-full overflow-auto custom-scrollbar bg-white rounded-none relative">
+          <div className="absolute inset-0 bg-black/0 group-hover/preview:bg-black/5 transition-colors z-10 pointer-events-none" />
+          <iframe
+            srcDoc={template.html}
+            title={template.title}
+            className="w-full h-full border-none pointer-events-none"
+            style={{ minHeight: '100%' }}
           />
-        ) : (
-          <div className="w-full h-full overflow-auto custom-scrollbar bg-white rounded-none">
-            <iframe 
-              srcDoc={htmlContent} 
-              title={template.title} 
-              className="w-full h-full border-none"
-              style={{ minHeight: '100%' }}
-            />
+          <div className="absolute bottom-2 right-2 opacity-0 group-hover/preview:opacity-100 transition-opacity z-20">
+            <span className="bg-[#0d1117]/80 text-[9px] font-mono text-cyan-400 px-2 py-1 rounded border border-cyan-500/20 backdrop-blur-sm">
+              Click to view
+            </span>
           </div>
-        )}
+        </div>
       </CardContent>
 
-      <CardFooter className="flex gap-2 pt-4 pb-4">
-        {isEditing ? (
-          <Button 
-            onClick={handleSave} 
-            className="flex-1 bg-primary text-primary-foreground hover:bg-primary/90 gap-2 h-10 font-medium"
-          >
-            <Save className="h-4 w-4" /> Commit Changes
-          </Button>
-        ) : (
-          <Button 
-            onClick={handleCopy}
-            className="flex-1 bg-primary text-primary-foreground hover:bg-primary/90 gap-2 h-10 font-medium shadow-lg shadow-primary/10"
-          >
-            {isCopied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-            Copy Template
-          </Button>
-        )}
-        
-        {!isEditing && canEdit && (
-          <Button 
-            variant="outline" 
-            onClick={handleReset} 
-            className="bg-transparent border-white/10 hover:bg-destructive/10 hover:text-destructive hover:border-destructive/20 h-10 px-3"
-            title="Reset"
-          >
-            <RotateCcw className="h-4 w-4" />
-          </Button>
-        )}
+      <CardFooter className="flex gap-2 pt-3 pb-3 relative">
+        <Button
+          onClick={handleCopyGmail}
+          className="flex-1 bg-gradient-to-r from-cyan-500 to-emerald-500 text-black hover:from-cyan-400 hover:to-emerald-400 gap-1.5 h-9 font-bold text-xs shadow-lg shadow-cyan-500/20"
+        >
+          {isGmailCopied ? <Check className="h-3.5 w-3.5" /> : <Mail className="h-3.5 w-3.5" />}
+          {isGmailCopied ? "Copied!" : "Copy for Gmail"}
+        </Button>
+        <Button
+          onClick={handleCopyRaw}
+          variant="outline"
+          className="bg-transparent border border-slate-700/50 hover:bg-white/5 h-9 px-3"
+          title="Copy HTML"
+        >
+          {isCopied ? <Check className="h-3.5 w-3.5" /> : <Code className="h-3.5 w-3.5" />}
+        </Button>
       </CardFooter>
     </Card>
   );

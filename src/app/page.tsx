@@ -1,10 +1,11 @@
 
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { AuthScreen } from '@/components/TemplateVault/AuthScreen';
 import { Dashboard } from '@/components/TemplateVault/Dashboard';
 import { UserAccount, SESSION_STORAGE_KEY } from '@/lib/auth';
+import { useSessionTimeout } from '@/hooks/use-session-timeout';
 
 export default function Home() {
   const [currentUser, setCurrentUser] = useState<UserAccount | null>(null);
@@ -22,17 +23,19 @@ export default function Home() {
     setIsLoading(false);
   }, []);
 
+  const handleLogout = useCallback(() => {
+    setCurrentUser(null);
+    localStorage.removeItem(SESSION_STORAGE_KEY);
+  }, []);
+
+  useSessionTimeout(handleLogout);
+
   const handleLogin = (user: UserAccount) => {
     setCurrentUser(user);
     localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(user));
   };
 
-  const handleLogout = () => {
-    setCurrentUser(null);
-    localStorage.removeItem(SESSION_STORAGE_KEY);
-  };
-
-  if (isLoading) return <div className="min-h-screen bg-background" />;
+  if (isLoading) return <div className="min-h-screen bg-[#0a0e17]" />;
 
   if (!currentUser) {
     return <AuthScreen onLogin={handleLogin} />;
