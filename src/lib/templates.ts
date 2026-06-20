@@ -164,24 +164,32 @@ export const DEFAULT_TEMPLATES: EmailTemplate[] = [
     title: 'Company Profile',
     category: 'General',
     fieldGroups: [
-      { name: 'About', fields: [
-        { key: 'heading', label: 'Heading', type: 'text', placeholder: 'e.g. Who We Are' },
-        { key: 'body', label: 'Description', type: 'textarea', placeholder: 'Brief company overview...' },
+      { name: 'Headline', fields: [
+        { key: 'headline', label: 'Gold Band Headline', type: 'text', placeholder: 'e.g. Ghana\'s Most Trusted 360° Brand Agency' },
       ]},
-      { name: 'Services', fields: [
-        { key: 'services', label: 'Core Services', type: 'textarea', placeholder: 'List the main services...' },
+      { name: 'Who We Are', fields: [
+        { key: 'whoHeading', label: 'Section Heading', type: 'text', placeholder: 'e.g. Your Brand\'s Growth Partner' },
+        { key: 'whoBody1', label: 'History Paragraph', type: 'textarea', placeholder: 'Company history...' },
+        { key: 'whoBody2', label: 'Values Paragraph', type: 'textarea', placeholder: 'Company values...' },
       ]},
-      { name: 'Contact', fields: [
-        { key: 'cta', label: 'CTA Button', type: 'text', placeholder: 'e.g. Partner With Us' },
-        { key: 'ctaUrl', label: 'CTA Link', type: 'text', placeholder: 'https://...' },
+      { name: 'Vision & Mission', fields: [
+        { key: 'vision', label: 'Vision', type: 'textarea', placeholder: 'Company vision...' },
+        { key: 'mission', label: 'Mission', type: 'textarea', placeholder: 'Company mission...' },
+      ]},
+      { name: 'Call to Action', fields: [
+        { key: 'ctaHeading', label: 'CTA Heading', type: 'text', placeholder: 'e.g. Ready to Elevate Your Brand?' },
+        { key: 'ctaSubtext', label: 'CTA Subtext', type: 'text', placeholder: 'e.g. Let\'s create something unforgettable.' },
       ]},
     ],
     values: {
-      heading: 'Ghana\'s Most Complete <em>Business Solutions</em> Partner',
-      body: 'SMIC360 Limited is a multi-sector powerhouse headquartered in Accra, Ghana. Established in 2006, we drive growth by aligning strategy with execution across three critical business pillars: Advertising & Marketing, Real Estate Development, and Procurement & Supply Solutions.',
-      services: 'Advertising & Marketing — Strategy, Branding, Media Buying, Campaign Execution, Digital Marketing\n\nReal Estate Development — Phoenix Enclave, Furnished Apartments, Commercial Properties\n\nProcurement & Supply — Strategic Sourcing, Vendor Management, Quality Assurance, Logistics',
-      cta: 'Explore Our Solutions',
-      ctaUrl: 'https://smic360.com/solutions/',
+      headline: "Ghana\u2019s Most Trusted 360\u00b0 Brand Agency \u2014 Delivering Real Results Since 2006",
+      whoHeading: "Your Brand\u2019s Growth Partner",
+      whoBody1: "Formerly Meshan-Ad Consult, SMIC360 was registered in 2006 and began formal operations in April 2009 \u2014 growing from a sole proprietorship into a fully incorporated Limited Liability Company in 2011.",
+      whoBody2: "We are built on the passion to offer efficient, sustainable solutions \u2014 treating every client, staff member and supplier like family.",
+      vision: "To become the Preferred Advertising Agency in Ghana and Beyond.",
+      mission: "To provide quality, effective Advertising, Media and PR while investing in our people and using up-to-date technology.",
+      ctaHeading: "Ready to Elevate Your Brand?",
+      ctaSubtext: "Let\u2019s create something your audience will never forget.",
     },
     html: '',
   },
@@ -798,7 +806,7 @@ function rInvoice(v: Record<string, string>): string {
 }
 
 function rCompanyProfile(v: Record<string, string>): string {
-  return `<!DOCTYPE html><html><head>${HEAD}<style>${BASE_CSS}.outer{background:${SMIC.bg};padding:40px 20px}.card{${CARD}}.hero{padding:50px 40px;text-align:center;background:#080808;border-bottom:1px solid ${SMIC.borderLight}}.content{padding:40px;color:${SMIC.text}}.h1{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;margin:0 0 16px;line-height:1.1;text-align:center}.h1 em{font-style:italic;color:${SMIC.gold}}.body{font-size:15px;line-height:1.8;color:${SMIC.muted};margin-bottom:30px;text-align:center}.svc{border-top:1px solid ${SMIC.borderLight};padding-top:24px;margin-top:10px}.svc-item{padding:16px 0;border-bottom:1px solid #111;font-size:13px;color:${SMIC.muted};line-height:1.7;white-space:pre-line}.btn{${GOLD_BTN};text-align:center;display:block;margin-top:30px}.footer{${FOOTER}}</style></head><body><div class="outer"><div class="card"><div class="hero">${logoBlock(70, 16)}<div style="font-family:'Cormorant Garamond',serif;font-size:28px;color:${SMIC.text};letter-spacing:0.1em;margin-bottom:4px">SMIC360</div><div style="font-size:9px;color:${SMIC.dim};letter-spacing:0.3em;text-transform:uppercase">${SMIC.tagline}</div></div><div class="content"><h1 class="h1">${v.heading || ''}</h1><p class="body">${v.body || ''}</p>${v.services ? `<div class="svc"><div class="svc-item">${v.services}</div></div>` : ''}${v.cta ? `<a href="${v.ctaUrl || '#'}" class="btn">${v.cta}</a>` : ''}</div>${footer()}</div></div></body></html>`;
+  return rCompanyProfileFull(v);
 }
 
 function rCampaignProposal(v: Record<string, string>): string {

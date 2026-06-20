@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import {
   ArrowLeft, Copy, Edit3, Save, RotateCcw, Trash2, X, Mail, Code,
-  CopyPlus, Check, Eye
+  CopyPlus, Check, Eye, FileCode2
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { EmailTemplate, generateHtml } from '@/lib/templates';
@@ -45,6 +45,8 @@ export function TemplateViewer({ template, currentUser, onUpdate, onReset, onDel
   const [previewMode, setPreviewMode] = useState<"desktop" | "mobile">("desktop");
   const [htmlSourceVisible, setHtmlSourceVisible] = useState(false);
   const [highlightText, setHighlightText] = useState(true);
+  const [replaceOpen, setReplaceOpen] = useState(false);
+  const [replaceCode, setReplaceCode] = useState("");
   const { toast } = useToast();
 
   const canEdit = currentUser.role === 'Admin' || currentUser.role === 'Manager';
@@ -153,6 +155,19 @@ export function TemplateViewer({ template, currentUser, onUpdate, onReset, onDel
     setIsEditing(false);
   };
 
+  const handleReplaceHtml = () => {
+    const raw = replaceCode.trim();
+    if (!raw) {
+      toast({ title: "No HTML", description: "Paste HTML code first.", variant: "destructive" });
+      return;
+    }
+    const updated = { ...template, html: raw, values: { ...template.values, rawHtml: raw } };
+    onUpdate(updated);
+    setReplaceOpen(false);
+    setReplaceCode("");
+    toast({ title: "HTML Replaced", description: `"${template.title}" source has been replaced.` });
+  };
+
   const totalFields = (template.fieldGroups || []).reduce((acc, g) => acc + g.fields.length, 0);
 
   return (
@@ -223,6 +238,18 @@ export function TemplateViewer({ template, currentUser, onUpdate, onReset, onDel
           >
             <CopyPlus className="w-3.5 h-3.5" />
           </Button>
+
+          {canEdit && (
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => { setReplaceCode(template.html || ''); setReplaceOpen(true); }}
+              className="text-slate-400 hover:text-amber-400 hover:bg-amber-400/5 h-9 w-9"
+              title="Replace HTML Source"
+            >
+              <FileCode2 className="w-3.5 h-3.5" />
+            </Button>
+          )}
 
           {canEdit && (
             <Button
@@ -421,6 +448,43 @@ export function TemplateViewer({ template, currentUser, onUpdate, onReset, onDel
           </div>
         )}
       </div>
+
+      {/* Replace HTML Modal */}
+      {replaceOpen && (
+        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 backdrop-blur-sm" onClick={() => setReplaceOpen(false)}>
+          <div className="bg-[#161b22] border border-slate-700/50 rounded-2xl w-full max-w-2xl max-h-[85vh] flex flex-col shadow-2xl shadow-cyan-500/5" onClick={e => e.stopPropagation()}>
+            <div className="px-6 py-4 border-b border-slate-700/30 flex items-center justify-between">
+              <div>
+                <h2 className="text-sm font-semibold text-white">Replace HTML Source</h2>
+                <p className="text-[11px] text-slate-500 font-mono mt-0.5">Overwrite the HTML for &quot;{template.title}&quot;</p>
+              </div>
+              <Button variant="ghost" size="icon" onClick={() => setReplaceOpen(false)} className="h-7 w-7 text-slate-400 hover:text-white">
+                <X className="w-4 h-4" />
+              </Button>
+            </div>
+            <div className="flex-1 overflow-y-auto p-6 space-y-4 custom-scrollbar">
+              <div className="space-y-1.5 flex-1">
+                <label className="text-[10px] font-mono uppercase tracking-widest text-slate-500">New HTML Source</label>
+                <textarea
+                  value={replaceCode}
+                  onChange={e => setReplaceCode(e.target.value)}
+                  placeholder="Paste the replacement HTML here..."
+                  className="w-full min-h-[300px] text-[11px] font-mono text-slate-300 bg-[#0d1117] border border-slate-700/50 rounded-lg p-4 resize-none focus:outline-none focus:ring-1 focus:ring-amber-500/30 custom-scrollbar"
+                  spellCheck={false}
+                />
+              </div>
+            </div>
+            <div className="px-6 py-4 border-t border-slate-700/30 flex justify-end gap-3">
+              <Button variant="ghost" onClick={() => setReplaceOpen(false)} className="text-xs font-mono text-slate-400 hover:text-white h-9">
+                Cancel
+              </Button>
+              <Button onClick={handleReplaceHtml} className="gap-1.5 bg-gradient-to-r from-amber-500 to-orange-500 text-black font-bold text-xs h-9 px-4 hover:from-amber-400 hover:to-orange-400 shadow-lg shadow-amber-500/20">
+                <FileCode2 className="w-3.5 h-3.5" /> Replace HTML
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

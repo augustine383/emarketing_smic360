@@ -8,7 +8,7 @@ import { UserManagement } from './UserManagement';
 import { Sidebar } from './Sidebar';
 import { TemplateViewer } from './TemplateViewer';
 import { Input } from "@/components/ui/input";
-import { Search, Plus, Download, Upload, ArrowUpDown, PanelLeft } from "lucide-react";
+import { Search, Plus, Download, Upload, ArrowUpDown, PanelLeft, FileCode2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Toaster } from "@/components/ui/toaster";
 import { useToast } from "@/hooks/use-toast";
@@ -189,6 +189,38 @@ export function Dashboard({ currentUser, onLogout }: DashboardProps) {
     categories: new Set(templates.map(t => t.category)).size,
   }), [templates]);
 
+  const [htmlImportOpen, setHtmlImportOpen] = useState(false);
+  const [htmlImportCode, setHtmlImportCode] = useState("");
+  const [htmlImportName, setHtmlImportName] = useState("");
+  const [htmlImportCategory, setHtmlImportCategory] = useState("General");
+
+  const handleHtmlImport = useCallback(() => {
+    const raw = htmlImportCode.trim();
+    if (!raw) {
+      toast({ title: "No HTML", description: "Paste some HTML code first.", variant: "destructive" });
+      return;
+    }
+    const title = htmlImportName.trim() || "Imported Template";
+    const newTemplate: EmailTemplate = {
+      id: crypto.randomUUID(),
+      title,
+      category: htmlImportCategory || "General",
+      fieldGroups: [
+        { name: "Raw HTML", fields: [
+          { key: "rawHtml", label: "HTML Source", type: "textarea", placeholder: "Paste your HTML here..." },
+        ]},
+      ],
+      values: { rawHtml: raw },
+      html: raw,
+    };
+    setTemplates(prev => [newTemplate, ...prev]);
+    setHtmlImportOpen(false);
+    setHtmlImportCode("");
+    setHtmlImportName("");
+    setHtmlImportCategory("General");
+    toast({ title: "Template Imported", description: `"${title}" has been added to your vault.` });
+  }, [htmlImportCode, htmlImportName, htmlImportCategory, toast]);
+
   return (
     <div className="min-h-screen bg-[#0a0e17] flex">
       {/* Scanline overlay */}
@@ -308,6 +340,10 @@ export function Dashboard({ currentUser, onLogout }: DashboardProps) {
                       <DropdownMenuItem onClick={handleImport} className="gap-2 cursor-pointer font-mono text-xs text-slate-300">
                         <Upload className="h-3.5 w-3.5" /> Import Templates
                       </DropdownMenuItem>
+                      <DropdownMenuSeparator className="bg-slate-700/50" />
+                      <DropdownMenuItem onClick={() => setHtmlImportOpen(true)} className="gap-2 cursor-pointer font-mono text-xs text-slate-300">
+                        <FileCode2 className="h-3.5 w-3.5" /> Import from HTML
+                      </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
                   <input ref={fileInputRef} type="file" accept=".json" className="hidden" onChange={handleImportFile} />
@@ -404,6 +440,63 @@ export function Dashboard({ currentUser, onLogout }: DashboardProps) {
         </footer>
       </div>
       <Toaster />
+
+      {/* Import HTML Modal */}
+      {htmlImportOpen && (
+        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 backdrop-blur-sm" onClick={() => setHtmlImportOpen(false)}>
+          <div className="bg-[#161b22] border border-slate-700/50 rounded-2xl w-full max-w-2xl max-h-[85vh] flex flex-col shadow-2xl shadow-cyan-500/5" onClick={e => e.stopPropagation()}>
+            <div className="px-6 py-4 border-b border-slate-700/30 flex items-center justify-between">
+              <div>
+                <h2 className="text-sm font-semibold text-white">Import HTML Template</h2>
+                <p className="text-[11px] text-slate-500 font-mono mt-0.5">Paste any HTML email template to add it to your vault</p>
+              </div>
+              <Button variant="ghost" size="icon" onClick={() => setHtmlImportOpen(false)} className="h-7 w-7 text-slate-400 hover:text-white">
+                <X className="w-4 h-4" />
+              </Button>
+            </div>
+            <div className="flex-1 overflow-y-auto p-6 space-y-4 custom-scrollbar">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-mono uppercase tracking-widest text-slate-500">Template Name</label>
+                  <Input
+                    value={htmlImportName}
+                    onChange={e => setHtmlImportName(e.target.value)}
+                    placeholder="e.g. Summer Campaign 2026"
+                    className="h-9 text-xs bg-[#0d1117] border border-slate-700/50 text-white font-mono focus-visible:ring-1 focus-visible:ring-cyan-500/30"
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-mono uppercase tracking-widest text-slate-500">Category</label>
+                  <Input
+                    value={htmlImportCategory}
+                    onChange={e => setHtmlImportCategory(e.target.value)}
+                    placeholder="e.g. Marketing"
+                    className="h-9 text-xs bg-[#0d1117] border border-slate-700/50 text-white font-mono focus-visible:ring-1 focus-visible:ring-cyan-500/30"
+                  />
+                </div>
+              </div>
+              <div className="space-y-1.5 flex-1">
+                <label className="text-[10px] font-mono uppercase tracking-widest text-slate-500">HTML Source</label>
+                <textarea
+                  value={htmlImportCode}
+                  onChange={e => setHtmlImportCode(e.target.value)}
+                  placeholder="Paste your full HTML email template here..."
+                  className="w-full min-h-[300px] text-[11px] font-mono text-slate-300 bg-[#0d1117] border border-slate-700/50 rounded-lg p-4 resize-none focus:outline-none focus:ring-1 focus:ring-cyan-500/30 custom-scrollbar"
+                  spellCheck={false}
+                />
+              </div>
+            </div>
+            <div className="px-6 py-4 border-t border-slate-700/30 flex justify-end gap-3">
+              <Button variant="ghost" onClick={() => setHtmlImportOpen(false)} className="text-xs font-mono text-slate-400 hover:text-white h-9">
+                Cancel
+              </Button>
+              <Button onClick={handleHtmlImport} className="gap-1.5 bg-gradient-to-r from-cyan-500 to-emerald-500 text-black font-bold text-xs h-9 px-4 hover:from-cyan-400 hover:to-emerald-400 shadow-lg shadow-cyan-500/20">
+                <FileCode2 className="w-3.5 h-3.5" /> Import Template
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
