@@ -870,42 +870,711 @@ function rPasswordReset(v: Record<string, string>): string {
 }
 
 function rCompanyProfileFull(v: Record<string, string>): string {
-  return `<!DOCTYPE html><html lang="en"><head>${HEAD}<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"><style>body{margin:0;padding:0;background:#000;font-family:'DM Sans',Arial,sans-serif;-webkit-font-smoothing:antialiased}img{max-width:100%;height:auto}</style></head><body>
-<table width="100%" cellpadding="0" cellspacing="0" style="background:#000;padding:32px 0"><tr><td align="center">
-<table width="768" cellpadding="0" cellspacing="0" style="max-width:768px;width:100%">
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SMIC360 Limited — Advertising | Branding | Marketing</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
 
-<tr><td style="background:#1A1208;padding:10px 28px;border-radius:12px 12px 0 0"><table width="100%" cellpadding="0" cellspacing="0"><tr><td style="color:#9A8C7A;font-size:11px;letter-spacing:2px;font-weight:500">EST. 2006 &middot; ACCRA, GHANA</td><td align="right" style="color:#9A8C7A;font-size:11px;letter-spacing:1px"><a href="tel:+233203361155" style="color:#C9A84C;text-decoration:none">020 336 1155</a> &nbsp;&middot;&nbsp; <a href="tel:+233541665108" style="color:#C9A84C;text-decoration:none">054 166 5108</a></td></tr></table></td></tr>
+<body style="margin:0;padding:0;background:#000000;font-family:'DM Sans',Arial,sans-serif;">
 
-<tr><td style="background:#1A1208;padding:0"><img src="${HERO_IMG}" alt="SMIC360" style="width:100%;height:480px;object-fit:cover;object-position:top;display:block;opacity:0.55"><table width="100%" cellpadding="0" cellspacing="0" style="position:relative;margin-top:-180px"><tr><td style="padding:0 48px 48px"><div style="width:52px;height:3px;background:#C9A84C;margin-bottom:22px"></div><div style="margin-bottom:12px"><img src="${LOGO_CLOUD}" alt="SMIC360" style="width:72px;height:72px;object-fit:contain;border-radius:8px;display:block"></div><div style="font-family:'Playfair Display',Georgia,serif;font-size:46px;font-weight:900;color:#FFF;line-height:1;letter-spacing:-1px;margin-bottom:6px">SMIC<span style="color:#C9A84C">360</span></div><div style="font-size:11px;font-weight:500;letter-spacing:5px;color:#C9A84C;text-transform:uppercase;margin-bottom:28px">Limited</div><div style="font-size:13px;font-weight:300;letter-spacing:4px;color:#D8CCBA;text-transform:uppercase">Advertising &amp; Marketing &nbsp;|&nbsp; Real Estate Development &nbsp;|&nbsp; Procurement &amp; Supply Solutions</div></td></tr></table></td></tr>
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#000000;padding:32px 0;">
+<tr><td align="center">
 
-<tr><td style="background:#C9A84C;padding:20px 48px"><table width="100%" cellpadding="0" cellspacing="0"><tr><td><div style="font-family:'Playfair Display',Georgia,serif;font-size:22px;font-weight:700;color:#1A1208;line-height:1.3">${v.headline || ''}</div></td><td width="120" align="right" style="padding-left:20px"><a href="mailto:smic360ltd@gmail.com" style="display:inline-block;background:#1A1208;color:#C9A84C;font-size:12px;font-weight:600;text-decoration:none;padding:10px 18px;border-radius:6px;letter-spacing:1px;white-space:nowrap">GET IN TOUCH</a></td></tr></table></td></tr>
+<table width="768" cellpadding="0" cellspacing="0" style="max-width:768px;width:100%;">
 
-<tr><td style="background:#FEFCF7;padding:52px 48px 44px"><table width="100%" cellpadding="0" cellspacing="0"><tr><td width="54%" style="vertical-align:top;padding-right:32px"><div style="font-size:10px;font-weight:600;letter-spacing:4px;color:#C9A84C;text-transform:uppercase;margin-bottom:14px">Who We Are</div><div style="font-family:'Playfair Display',Georgia,serif;font-size:30px;font-weight:700;color:#1A1208;line-height:1.2;margin-bottom:20px">${v.whoHeading || ''}</div><p style="font-size:14px;color:#4A4036;line-height:1.85;margin:0 0 18px">${v.whoBody1 || ''}</p><p style="font-size:14px;color:#4A4036;line-height:1.85;margin:0">${v.whoBody2 || ''}</p></td><td width="46%" style="vertical-align:top"><img src="${TEAM_IMG}" alt="SMIC360 team" style="width:100%;height:360px;object-fit:cover;object-position:top;border-radius:10px;display:block"><table width="100%" cellpadding="0" cellspacing="0" style="margin-top:16px"><tr><td style="padding:2px"><div style="background:#1A1208;border-radius:8px;padding:12px 14px;text-align:center"><div style="font-family:'Playfair Display',serif;font-size:22px;color:#C9A84C;font-weight:700">18+</div><div style="font-size:10px;color:#9A8C7A;letter-spacing:1.5px;text-transform:uppercase;margin-top:2px">Years Active</div></div></td><td style="padding:2px"><div style="background:#1A1208;border-radius:8px;padding:12px 14px;text-align:center"><div style="font-family:'Playfair Display',serif;font-size:22px;color:#C9A84C;font-weight:700">30+</div><div style="font-size:10px;color:#9A8C7A;letter-spacing:1.5px;text-transform:uppercase;margin-top:2px">Clients Served</div></div></td><td style="padding:2px"><div style="background:#1A1208;border-radius:8px;padding:12px 14px;text-align:center"><div style="font-family:'Playfair Display',serif;font-size:22px;color:#C9A84C;font-weight:700">3</div><div style="font-size:10px;color:#9A8C7A;letter-spacing:1.5px;text-transform:uppercase;margin-top:2px">Core Pillars</div></div></td></tr></table></td></tr></table></td></tr>
+<tr>
+<td style="background:#1A1208;padding:10px 28px;border-radius:12px 12px 0 0;">
+  <table width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+      <td style="color:#9A8C7A;font-size:11px;letter-spacing:2px;font-family:'DM Sans',Arial,sans-serif;font-weight:500;">
+        EST. 2006 &middot; ACCRA, GHANA
+      </td>
+      <td align="right" style="color:#9A8C7A;font-size:11px;letter-spacing:1px;font-family:'DM Sans',Arial,sans-serif;">
+        <a href="tel:+233203361155" style="color:#C9A84C;text-decoration:none;">020 336 1155</a>
+        &nbsp;&middot;&nbsp;
+        <a href="tel:+233541665108" style="color:#C9A84C;text-decoration:none;">054 166 5108</a>
+      </td>
+    </tr>
+  </table>
+</td>
+</tr>
 
-<tr><td style="background:#1A1208;padding:40px 48px"><table width="100%" cellpadding="0" cellspacing="0"><tr><td width="50%" style="vertical-align:top;padding-right:24px;border-right:1px solid #2E2518"><div style="font-size:10px;font-weight:600;letter-spacing:3px;color:#C9A84C;text-transform:uppercase;margin-bottom:10px">Our Vision</div><p style="font-size:14px;color:#D8CCBA;line-height:1.8;margin:0">${v.vision || ''}</p></td><td width="50%" style="vertical-align:top;padding-left:24px"><div style="font-size:10px;font-weight:600;letter-spacing:3px;color:#C9A84C;text-transform:uppercase;margin-bottom:10px">Our Mission</div><p style="font-size:14px;color:#D8CCBA;line-height:1.8;margin:0">${v.mission || ''}</p></td></tr></table></td></tr>
+<tr>
+<td style="background:#1A1208;padding:0;position:relative;">
+  <img src="${HERO_IMG}"
+       alt="SMIC360 — Premium Advertising Agency"
+       style="width:100%;height:480px;object-fit:cover;object-position:top;display:block;opacity:0.55;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="position:relative;margin-top:-180px;">
+    <tr>
+      <td style="padding:0 48px 48px;">
+        <div style="width:52px;height:3px;background:#C9A84C;margin-bottom:22px;"></div>
+        <div style="margin-bottom:12px;">
+          <img src="${LOGO_CLOUD}"
+               alt="SMIC360 Logo"
+               style="width:72px;height:72px;object-fit:contain;border-radius:8px;display:block;">
+        </div>
+        <div style="font-family:'Playfair Display',Georgia,serif;font-size:46px;font-weight:900;
+                    color:#FFFFFF;line-height:1;letter-spacing:-1px;margin-bottom:6px;">
+          SMIC<span style="color:#C9A84C;">360</span>
+        </div>
+        <div style="font-family:'DM Sans',Arial,sans-serif;font-size:11px;font-weight:500;
+                    letter-spacing:5px;color:#C9A84C;text-transform:uppercase;margin-bottom:28px;">
+          Limited
+        </div>
+        <div style="font-family:'DM Sans',Arial,sans-serif;font-size:13px;font-weight:300;
+                    letter-spacing:4px;color:#D8CCBA;text-transform:uppercase;">
+                  Advertising &amp; Marketing &nbsp;|&nbsp; Real Estate Development &nbsp;|&nbsp; Procurement &amp; Supply Solutions
+        </div>
+      </td>
+    </tr>
+  </table>
+</td>
+</tr>
 
-<tr><td style="background:#FEFCF7;padding:52px 48px 8px"><div style="font-size:10px;font-weight:600;letter-spacing:4px;color:#C9A84C;text-transform:uppercase;margin-bottom:12px">Our Core Solutions</div><div style="font-family:'Playfair Display',Georgia,serif;font-size:32px;font-weight:700;color:#1A1208;line-height:1.2">A Fully Integrated 360&deg; Approach</div><p style="font-size:14px;color:#4A4036;line-height:1.85;margin:18px 0 0">At SMIC360, we drive growth by aligning strategy with execution across three critical business pillars. We eliminate fragmentation by providing seamless, results-driven experiences across the entire value chain.</p><div style="width:44px;height:3px;background:#C9A84C;margin-top:18px"></div></td></tr>
+<tr>
+<td style="background:#C9A84C;padding:20px 48px;">
+  <table width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <div style="font-family:'Playfair Display',Georgia,serif;font-size:22px;font-weight:700;
+                    color:#1A1208;line-height:1.3;">
+          ${v.headline || ''}
+        </div>
+      </td>
+      <td width="120" align="right" style="padding-left:20px;">
+        <a href="mailto:smic360ltd@gmail.com"
+           style="display:inline-block;background:#1A1208;color:#C9A84C;
+                  font-family:'DM Sans',Arial,sans-serif;font-size:12px;font-weight:600;
+                  text-decoration:none;padding:10px 18px;border-radius:6px;
+                  letter-spacing:1px;white-space:nowrap;">
+          GET IN TOUCH
+        </a>
+      </td>
+    </tr>
+  </table>
+</td>
+</tr>
 
-<tr><td style="background:#FEFCF7;padding:28px 48px 0"><div style="background:#1A1208;border-radius:10px;overflow:hidden"><img src="${HERO_IMG}" alt="Advertising" style="width:100%;height:220px;object-fit:cover;object-position:top;display:block;opacity:0.75"><div style="padding:28px"><div style="font-size:9px;font-weight:600;letter-spacing:3px;color:#C9A84C;text-transform:uppercase;margin-bottom:8px">I</div><div style="font-family:'Playfair Display',serif;font-size:20px;color:#fff;font-weight:700;margin-bottom:8px">Advertising &amp; Marketing</div><p style="font-size:13px;color:#9A8C7A;line-height:1.7;margin:0 0 22px">Laying the Foundation for Brand Power &amp; Market Dominance &mdash; a comprehensive ecosystem of creative and strategic services designed to build powerful, memorable brands that achieve sustainable growth.</p><table width="100%" cellpadding="0" cellspacing="0"><tr><td width="50%" style="vertical-align:top;padding-right:14px;padding-bottom:16px"><div style="border-left:2px solid #C9A84C;padding-left:12px"><div style="font-size:12px;font-weight:600;color:#fff;margin-bottom:5px">Strategy &amp; Advisory</div><p style="font-size:12px;color:#9A8C7A;line-height:1.65;margin:0">We define your path to success through brand positioning, market entry strategies, and data-informed business advisory.</p></div></td><td width="50%" style="vertical-align:top;padding-left:14px;padding-bottom:16px"><div style="border-left:2px solid #C9A84C;padding-left:12px"><div style="font-size:12px;font-weight:600;color:#fff;margin-bottom:5px">Branding &amp; Creative</div><p style="font-size:12px;color:#9A8C7A;line-height:1.65;margin:0">Our team crafts compelling corporate identities and visual communication designs that resonate across digital and traditional platforms.</p></div></td></tr><tr><td width="50%" style="vertical-align:top;padding-right:14px"><div style="border-left:2px solid #C9A84C;padding-left:12px"><div style="font-size:12px;font-weight:600;color:#fff;margin-bottom:5px">Campaign Execution</div><p style="font-size:12px;color:#9A8C7A;line-height:1.65;margin:0">We bring ideas to life through integrated marketing, leveraging social media, search, and high-impact experiential activations.</p></div></td><td width="50%" style="vertical-align:top;padding-left:14px"><div style="border-left:2px solid #C9A84C;padding-left:12px"><div style="font-size:12px;font-weight:600;color:#fff;margin-bottom:5px">Media &amp; Production</div><p style="font-size:12px;color:#9A8C7A;line-height:1.65;margin:0">We maximise your reach through expert media buying, out-of-home (OOH) execution, and high-quality print management.</p></div></td></tr></table></div></div></td></tr>
+<tr>
+<td style="background:#FEFCF7;padding:52px 48px 44px;">
+  <table width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+      <td width="54%" style="vertical-align:top;padding-right:32px;">
+        <div style="font-size:10px;font-weight:600;letter-spacing:4px;color:#C9A84C;
+                    text-transform:uppercase;margin-bottom:14px;">Who We Are</div>
+        <div style="font-family:'Playfair Display',Georgia,serif;font-size:30px;font-weight:700;
+                    color:#1A1208;line-height:1.2;margin-bottom:20px;">
+          ${v.whoHeading || ''}
+        </div>
+        <p style="font-family:'DM Sans',Arial,sans-serif;font-size:14px;color:#4A4036;
+                  line-height:1.85;margin:0 0 18px;">
+          ${v.whoBody1 || ''}
+        </p>
+        <p style="font-family:'DM Sans',Arial,sans-serif;font-size:14px;color:#4A4036;
+                  line-height:1.85;margin:0;">
+          ${v.whoBody2 || ''}
+        </p>
+      </td>
+      <td width="46%" style="vertical-align:top;">
+        <img src="${TEAM_IMG}"
+             alt="SMIC360 team"
+             style="width:100%;height:360px;object-fit:cover;object-position:top;border-radius:10px;display:block;">
+        <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:16px;">
+          <tr>
+            <td style="padding:2px;">
+              <div style="background:#1A1208;border-radius:8px;padding:12px 14px;text-align:center;">
+                <div style="font-family:'Playfair Display',serif;font-size:22px;color:#C9A84C;font-weight:700;">18+</div>
+                <div style="font-size:10px;color:#9A8C7A;letter-spacing:1.5px;text-transform:uppercase;margin-top:2px;">Years Active</div>
+              </div>
+            </td>
+            <td style="padding:2px;">
+              <div style="background:#1A1208;border-radius:8px;padding:12px 14px;text-align:center;">
+                <div style="font-family:'Playfair Display',serif;font-size:22px;color:#C9A84C;font-weight:700;">30+</div>
+                <div style="font-size:10px;color:#9A8C7A;letter-spacing:1.5px;text-transform:uppercase;margin-top:2px;">Clients Served</div>
+              </div>
+            </td>
+            <td style="padding:2px;">
+              <div style="background:#1A1208;border-radius:8px;padding:12px 14px;text-align:center;">
+                <div style="font-family:'Playfair Display',serif;font-size:22px;color:#C9A84C;font-weight:700;">3</div>
+                <div style="font-size:10px;color:#9A8C7A;letter-spacing:1.5px;text-transform:uppercase;margin-top:2px;">Core Pillars</div>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</td>
+</tr>
 
-<tr><td style="background:#FEFCF7;padding:14px 48px 0"><div style="background:#1A1208;border-radius:10px;overflow:hidden"><img src="${RE_IMG}" alt="Real Estate" style="width:100%;height:220px;object-fit:cover;object-position:top;display:block;opacity:0.75"><div style="padding:28px"><div style="font-size:9px;font-weight:600;letter-spacing:3px;color:#C9A84C;text-transform:uppercase;margin-bottom:8px">II</div><div style="font-family:'Playfair Display',serif;font-size:20px;color:#fff;font-weight:700;margin-bottom:8px">Real Estate Development</div><p style="font-size:13px;color:#9A8C7A;line-height:1.7;margin:0 0 22px">Transforming Potential into Premium Assets &mdash; our real estate division focuses on the full lifecycle of property development and asset management, ensuring architectural excellence and maximum investment value.</p><table width="100%" cellpadding="0" cellspacing="0"><tr><td width="50%" style="vertical-align:top;padding-right:14px;padding-bottom:16px"><div style="border-left:2px solid #C9A84C;padding-left:12px"><div style="font-size:12px;font-weight:600;color:#fff;margin-bottom:5px">Property Development &amp; Strategic Sales</div><p style="font-size:12px;color:#9A8C7A;line-height:1.65;margin:0">We manage everything from land acquisition and project feasibility to the construction of modern residential and commercial complexes.</p></div></td><td width="50%" style="vertical-align:top;padding-left:14px;padding-bottom:16px"><div style="border-left:2px solid #C9A84C;padding-left:12px"><div style="font-size:12px;font-weight:600;color:#fff;margin-bottom:5px">Property Leasing &amp; Asset Management</div><p style="font-size:12px;color:#9A8C7A;line-height:1.65;margin:0">We specialise in the curation of premium rental portfolios, including furnished apartments and executive stays.</p></div></td></tr><tr><td width="50%" style="vertical-align:top;padding-right:14px"><div style="border-left:2px solid #C9A84C;padding-left:12px"><div style="font-size:12px;font-weight:600;color:#fff;margin-bottom:5px">Operational Excellence</div><p style="font-size:12px;color:#9A8C7A;line-height:1.65;margin:0">Our services include rigorous tenant screening, lease administration, and proactive maintenance to preserve long-term asset value.</p></div></td><td width="50%" style="vertical-align:top;padding-left:14px"><div style="border-left:2px solid #C9A84C;padding-left:12px"><div style="font-size:12px;font-weight:600;color:#fff;margin-bottom:5px">Hospitality Services</div><p style="font-size:12px;color:#9A8C7A;line-height:1.65;margin:0">We provide concierge-level support for short-term rentals and guest services.</p></div></td></tr></table></div></div></td></tr>
+<tr>
+<td style="background:#1A1208;padding:40px 48px;">
+  <table width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+      <td width="50%" style="vertical-align:top;padding-right:24px;border-right:1px solid #2E2518;">
+        <div style="font-size:10px;font-weight:600;letter-spacing:3px;color:#C9A84C;
+                    text-transform:uppercase;margin-bottom:10px;">Our Vision</div>
+        <p style="font-family:'DM Sans',Arial,sans-serif;font-size:14px;color:#D8CCBA;
+                  line-height:1.8;margin:0;">
+          ${v.vision || ''}
+        </p>
+      </td>
+      <td width="50%" style="vertical-align:top;padding-left:24px;">
+        <div style="font-size:10px;font-weight:600;letter-spacing:3px;color:#C9A84C;
+                    text-transform:uppercase;margin-bottom:10px;">Our Mission</div>
+        <p style="font-family:'DM Sans',Arial,sans-serif;font-size:14px;color:#D8CCBA;
+                  line-height:1.8;margin:0;">
+          ${v.mission || ''}
+        </p>
+      </td>
+    </tr>
+  </table>
+</td>
+</tr>
 
-<tr><td style="background:#FEFCF7;padding:14px 48px 44px"><div style="background:#1A1208;border-radius:10px;overflow:hidden"><img src="${PROC_IMG}" alt="Procurement" style="width:100%;height:220px;object-fit:cover;object-position:top;display:block;opacity:0.75"><div style="padding:28px"><div style="font-size:9px;font-weight:600;letter-spacing:3px;color:#C9A84C;text-transform:uppercase;margin-bottom:8px">III</div><div style="font-family:'Playfair Display',serif;font-size:20px;color:#fff;font-weight:700;margin-bottom:8px">Procurement &amp; Supply Solutions</div><p style="font-size:13px;color:#9A8C7A;line-height:1.7;margin:0 0 22px">Streamlining Global Sourcing with Precision and Reliability &mdash; we act as your dedicated sourcing partner, simplifying complex supply chains to deliver high-quality materials and equipment at competitive prices.</p><table width="100%" cellpadding="0" cellspacing="0"><tr><td width="50%" style="vertical-align:top;padding-right:14px;padding-bottom:16px"><div style="border-left:2px solid #C9A84C;padding-left:12px"><div style="font-size:12px;font-weight:600;color:#fff;margin-bottom:5px">Strategic Sourcing &amp; Cost Efficiency</div><p style="font-size:12px;color:#9A8C7A;line-height:1.65;margin:0">Leverage our extensive network to secure the best suppliers and negotiate competitive pricing, reducing your operational costs.</p></div></td><td width="50%" style="vertical-align:top;padding-left:14px;padding-bottom:16px"><div style="border-left:2px solid #C9A84C;padding-left:12px"><div style="font-size:12px;font-weight:600;color:#fff;margin-bottom:5px">Quality &amp; Reliability</div><p style="font-size:12px;color:#9A8C7A;line-height:1.65;margin:0">We prioritise stringent quality assurance and coordinate complex logistics to ensure every item is delivered on time and to specification.</p></div></td></tr></table><div style="border-left:2px solid #C9A84C;padding-left:12px"><div style="font-size:12px;font-weight:600;color:#fff;margin-bottom:10px">Diverse Sourcing Capabilities</div><table width="100%" cellpadding="0" cellspacing="0"><tr><td width="50%" style="vertical-align:top;padding-right:14px;padding-bottom:10px"><div style="background:#2E2518;border-radius:6px;padding:12px 14px"><div style="font-size:11px;font-weight:600;color:#C9A84C;margin-bottom:4px">Industrial &amp; Commercial</div><p style="font-size:11px;color:#9A8C7A;line-height:1.6;margin:0">Machinery, specialised tools, and safety equipment (PPE).</p></div></td><td width="50%" style="vertical-align:top;padding-left:14px;padding-bottom:10px"><div style="background:#2E2518;border-radius:6px;padding:12px 14px"><div style="font-size:11px;font-weight:600;color:#C9A84C;margin-bottom:4px">Construction Materials</div><p style="font-size:11px;color:#9A8C7A;line-height:1.6;margin:0">High-grade cement, steel, roofing, and electrical fittings.</p></div></td></tr><tr><td width="50%" style="vertical-align:top;padding-right:14px"><div style="background:#2E2518;border-radius:6px;padding:12px 14px"><div style="font-size:11px;font-weight:600;color:#C9A84C;margin-bottom:4px">Bulk Commodities</div><p style="font-size:11px;color:#9A8C7A;line-height:1.6;margin:0">Industrial and edible salt, and diverse raw materials for manufacturing.</p></div></td><td width="50%" style="vertical-align:top;padding-left:14px"><div style="background:#2E2518;border-radius:6px;padding:12px 14px"><div style="font-size:11px;font-weight:600;color:#C9A84C;margin-bottom:4px">Household &amp; Specialised Items</div><p style="font-size:11px;color:#9A8C7A;line-height:1.6;margin:0">Premium appliances, hard-to-find components, and custom-order products.</p></div></td></tr></table></div></div></div></td></tr>
+<tr>
+<td style="background:#FEFCF7;padding:52px 48px 8px;">
+  <div style="font-size:10px;font-weight:600;letter-spacing:4px;color:#C9A84C;
+              text-transform:uppercase;margin-bottom:12px;">Our Core Solutions</div>
+  <div style="font-family:'Playfair Display',Georgia,serif;font-size:32px;font-weight:700;
+              color:#1A1208;line-height:1.2;">
+    A Fully Integrated 360&deg; Approach
+  </div>
+  <p style="font-family:'DM Sans',Arial,sans-serif;font-size:14px;color:#4A4036;
+            line-height:1.85;margin:18px 0 0;">
+    At SMIC360, we drive growth by aligning strategy with execution across three critical business pillars. We eliminate fragmentation by providing seamless, results-driven experiences across the entire value chain.
+  </p>
+  <div style="width:44px;height:3px;background:#C9A84C;margin-top:18px;"></div>
+</td>
+</tr>
 
-<tr><td style="background:#C9A84C;padding:28px 48px"><div style="text-align:center"><div style="font-family:'Playfair Display',Georgia,serif;font-size:22px;font-weight:700;color:#1A1208;line-height:1.4;letter-spacing:0.5px">Building Foundations. &nbsp; Branding Futures. &nbsp; Connecting Markets.</div></div></td></tr>
+<tr>
+<td style="background:#FEFCF7;padding:28px 48px 0;">
+  <div style="background:#1A1208;border-radius:10px;overflow:hidden;">
+    <img src="${HERO_IMG}"
+         alt="Advertising &amp; Marketing"
+         style="width:100%;height:220px;object-fit:cover;object-position:top;display:block;opacity:0.75;">
+    <div style="padding:28px 28px 24px;">
+      <div style="font-size:9px;font-weight:600;letter-spacing:3px;color:#C9A84C;
+                  text-transform:uppercase;margin-bottom:8px;">I</div>
+      <div style="font-family:'Playfair Display',serif;font-size:20px;color:#fff;
+                  font-weight:700;margin-bottom:8px;">Advertising &amp; Marketing</div>
+      <p style="font-family:'DM Sans',Arial,sans-serif;font-size:13px;color:#9A8C7A;
+                line-height:1.7;margin:0 0 22px;">
+        Laying the Foundation for Brand Power &amp; Market Dominance &mdash; a comprehensive ecosystem of creative and strategic services designed to build powerful, memorable brands that achieve sustainable growth.
+      </p>
+      <table width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width="50%" style="vertical-align:top;padding-right:14px;padding-bottom:16px;">
+            <div style="border-left:2px solid #C9A84C;padding-left:12px;">
+              <div style="font-family:'DM Sans',Arial,sans-serif;font-size:12px;font-weight:600;
+                          color:#fff;margin-bottom:5px;">Strategy &amp; Advisory</div>
+              <p style="font-family:'DM Sans',Arial,sans-serif;font-size:12px;color:#9A8C7A;
+                        line-height:1.65;margin:0;">
+                We define your path to success through brand positioning, market entry strategies, and data-informed business advisory.
+              </p>
+            </div>
+          </td>
+          <td width="50%" style="vertical-align:top;padding-left:14px;padding-bottom:16px;">
+            <div style="border-left:2px solid #C9A84C;padding-left:12px;">
+              <div style="font-family:'DM Sans',Arial,sans-serif;font-size:12px;font-weight:600;
+                          color:#fff;margin-bottom:5px;">Branding &amp; Creative</div>
+              <p style="font-family:'DM Sans',Arial,sans-serif;font-size:12px;color:#9A8C7A;
+                        line-height:1.65;margin:0;">
+                Our team crafts compelling corporate identities and visual communication designs that resonate across digital and traditional platforms.
+              </p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td width="50%" style="vertical-align:top;padding-right:14px;">
+            <div style="border-left:2px solid #C9A84C;padding-left:12px;">
+              <div style="font-family:'DM Sans',Arial,sans-serif;font-size:12px;font-weight:600;
+                          color:#fff;margin-bottom:5px;">Campaign Execution</div>
+              <p style="font-family:'DM Sans',Arial,sans-serif;font-size:12px;color:#9A8C7A;
+                        line-height:1.65;margin:0;">
+                We bring ideas to life through integrated marketing, leveraging social media, search, and high-impact experiential activations.
+              </p>
+            </div>
+          </td>
+          <td width="50%" style="vertical-align:top;padding-left:14px;">
+            <div style="border-left:2px solid #C9A84C;padding-left:12px;">
+              <div style="font-family:'DM Sans',Arial,sans-serif;font-size:12px;font-weight:600;
+                          color:#fff;margin-bottom:5px;">Media &amp; Production</div>
+              <p style="font-family:'DM Sans',Arial,sans-serif;font-size:12px;color:#9A8C7A;
+                        line-height:1.65;margin:0;">
+                We maximise your reach through expert media buying, out-of-home (OOH) execution, and high-quality print management.
+              </p>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</td>
+</tr>
 
-<tr><td style="background:#1A1208;padding:52px 48px"><div style="font-size:10px;font-weight:600;letter-spacing:4px;color:#C9A84C;text-transform:uppercase;margin-bottom:12px">Our Approach</div><div style="font-family:'Playfair Display',Georgia,serif;font-size:28px;font-weight:700;color:#fff;line-height:1.2;margin-bottom:32px">A Structured Process,<br>Guaranteed Results</div><table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px"><tr><td width="42" style="vertical-align:top;padding-right:16px"><div style="width:38px;height:38px;background:#C9A84C;border-radius:50%;text-align:center;line-height:38px;font-family:'Playfair Display',serif;font-size:16px;color:#1A1208;font-weight:700">1</div></td><td style="vertical-align:top"><div style="font-size:14px;font-weight:600;color:#fff;margin-bottom:4px">Consultancy Work</div><p style="font-size:13px;color:#9A8C7A;line-height:1.7;margin:0">We meet to assess your needs, agree on budget and timelines, carry out research, then present a tailored implementation plan.</p></td></tr></table><div style="border-top:1px solid #2E2518;margin:0 0 20px"></div><table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px"><tr><td width="42" style="vertical-align:top;padding-right:16px"><div style="width:38px;height:38px;background:#C9A84C;border-radius:50%;text-align:center;line-height:38px;font-family:'Playfair Display',serif;font-size:16px;color:#1A1208;font-weight:700">2</div></td><td style="vertical-align:top"><div style="font-size:14px;font-weight:600;color:#fff;margin-bottom:4px">Concept &amp; Campaign</div><p style="font-size:13px;color:#9A8C7A;line-height:1.7;margin:0">We develop creative concepts, layouts, PR interventions and media placements targeted to your audience.</p></td></tr></table><div style="border-top:1px solid #2E2518;margin:0 0 20px"></div><table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px"><tr><td width="42" style="vertical-align:top;padding-right:16px"><div style="width:38px;height:38px;background:#C9A84C;border-radius:50%;text-align:center;line-height:38px;font-family:'Playfair Display',serif;font-size:16px;color:#1A1208;font-weight:700">3</div></td><td style="vertical-align:top"><div style="font-size:14px;font-weight:600;color:#fff;margin-bottom:4px">Implementation &amp; Monitoring</div><p style="font-size:13px;color:#9A8C7A;line-height:1.7;margin:0">We execute and monitor all activities with precision, then present a full performance report for evaluation.</p></td></tr></table><div style="background:#C9A84C;border-radius:8px;padding:18px 22px;margin-top:8px"><div style="font-size:12px;font-weight:600;letter-spacing:2px;color:#1A1208;text-transform:uppercase;margin-bottom:6px">Flexible Payment Options</div><div style="font-size:13px;color:#1A1208;line-height:1.7"><strong>Pay Per Project</strong> &mdash; pay individually for each task or campaign &nbsp;|&nbsp; <strong>Retainer Package</strong> &mdash; flat monthly or quarterly fee covering Creative, Marketing, Media/PR, or our full <em>General Retainer</em> for all-inclusive service with no extra charges.</div></div></td></tr>
+<tr>
+<td style="background:#FEFCF7;padding:14px 48px 0;">
+  <div style="background:#1A1208;border-radius:10px;overflow:hidden;">
+    <img src="${RE_IMG}"
+         alt="Real Estate Development"
+         style="width:100%;height:220px;object-fit:cover;object-position:top;display:block;opacity:0.75;">
+    <div style="padding:28px 28px 24px;">
+      <div style="font-size:9px;font-weight:600;letter-spacing:3px;color:#C9A84C;
+                  text-transform:uppercase;margin-bottom:8px;">II</div>
+      <div style="font-family:'Playfair Display',serif;font-size:20px;color:#fff;
+                  font-weight:700;margin-bottom:8px;">Real Estate Development</div>
+      <p style="font-family:'DM Sans',Arial,sans-serif;font-size:13px;color:#9A8C7A;
+                line-height:1.7;margin:0 0 22px;">
+        Transforming Potential into Premium Assets &mdash; our real estate division focuses on the full lifecycle of property development and asset management, ensuring architectural excellence and maximum investment value.
+      </p>
+      <table width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width="50%" style="vertical-align:top;padding-right:14px;padding-bottom:16px;">
+            <div style="border-left:2px solid #C9A84C;padding-left:12px;">
+              <div style="font-family:'DM Sans',Arial,sans-serif;font-size:12px;font-weight:600;
+                          color:#fff;margin-bottom:5px;">Property Development &amp; Strategic Sales</div>
+              <p style="font-family:'DM Sans',Arial,sans-serif;font-size:12px;color:#9A8C7A;
+                        line-height:1.65;margin:0;">
+                We manage everything from land acquisition and project feasibility to the construction of modern residential and commercial complexes.
+              </p>
+            </div>
+          </td>
+          <td width="50%" style="vertical-align:top;padding-left:14px;padding-bottom:16px;">
+            <div style="border-left:2px solid #C9A84C;padding-left:12px;">
+              <div style="font-family:'DM Sans',Arial,sans-serif;font-size:12px;font-weight:600;
+                          color:#fff;margin-bottom:5px;">Property Leasing &amp; Asset Management</div>
+              <p style="font-family:'DM Sans',Arial,sans-serif;font-size:12px;color:#9A8C7A;
+                        line-height:1.65;margin:0;">
+                We specialise in the curation of premium rental portfolios, including furnished apartments and executive stays.
+              </p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td width="50%" style="vertical-align:top;padding-right:14px;">
+            <div style="border-left:2px solid #C9A84C;padding-left:12px;">
+              <div style="font-family:'DM Sans',Arial,sans-serif;font-size:12px;font-weight:600;
+                          color:#fff;margin-bottom:5px;">Operational Excellence</div>
+              <p style="font-family:'DM Sans',Arial,sans-serif;font-size:12px;color:#9A8C7A;
+                        line-height:1.65;margin:0;">
+                Our services include rigorous tenant screening, lease administration, and proactive maintenance to preserve long-term asset value.
+              </p>
+            </div>
+          </td>
+          <td width="50%" style="vertical-align:top;padding-left:14px;">
+            <div style="border-left:2px solid #C9A84C;padding-left:12px;">
+              <div style="font-family:'DM Sans',Arial,sans-serif;font-size:12px;font-weight:600;
+                          color:#fff;margin-bottom:5px;">Hospitality Services</div>
+              <p style="font-family:'DM Sans',Arial,sans-serif;font-size:12px;color:#9A8C7A;
+                        line-height:1.65;margin:0;">
+                We provide concierge-level support for short-term rentals and guest services.
+              </p>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</td>
+</tr>
 
-<tr><td style="background:#FEFCF7;padding:52px 48px"><div style="font-size:10px;font-weight:600;letter-spacing:4px;color:#C9A84C;text-transform:uppercase;margin-bottom:12px">Client Testimonials</div><div style="font-family:'Playfair Display',Georgia,serif;font-size:28px;font-weight:700;color:#1A1208;margin-bottom:32px">Words from Those We\u2019ve Served</div><div style="background:#fff;border-left:4px solid #C9A84C;border-radius:0 8px 8px 0;padding:22px 24px;margin-bottom:18px;box-shadow:0 2px 12px rgba(0,0,0,0.05)"><p style="font-size:14px;color:#4A4036;line-height:1.8;margin:0 0 14px;font-style:italic">&ldquo;Despite our tight deadlines, we could still count on their creativity and delivery which met our demands and the evolving market of our organization.&rdquo;</p><div style="font-size:12px;font-weight:600;color:#1A1208;letter-spacing:1px">Suleiman Habuba, Media Director</div><div style="font-size:11px;color:#9A8C7A;margin-top:2px">Confederation of African Football (CAF)</div></div><div style="background:#fff;border-left:4px solid #C9A84C;border-radius:0 8px 8px 0;padding:22px 24px;margin-bottom:18px;box-shadow:0 2px 12px rgba(0,0,0,0.05)"><p style="font-size:14px;color:#4A4036;line-height:1.8;margin:0 0 14px;font-style:italic">&ldquo;If anyone knows BRANDING, this is the place to go for a good image and awesome communicative artworks. Thanks so much for my design.&rdquo;</p><div style="font-size:12px;font-weight:600;color:#1A1208;letter-spacing:1px">Katherine</div><div style="font-size:11px;color:#9A8C7A;margin-top:2px">Montessori Training Center</div></div><div style="background:#fff;border-left:4px solid #C9A84C;border-radius:0 8px 8px 0;padding:22px 24px;box-shadow:0 2px 12px rgba(0,0,0,0.05)"><p style="font-size:14px;color:#4A4036;line-height:1.8;margin:0 0 14px;font-style:italic">&ldquo;It is as if the company knew my needs even before I could tell them! They have the ability to work within your budget and produce with topmost quality.&rdquo;</p><div style="font-size:12px;font-weight:600;color:#1A1208;letter-spacing:1px">Clara Pinkrah-Sam, CEO</div><div style="font-size:11px;color:#9A8C7A;margin-top:2px">Claturally Natural Hair</div></div></td></tr>
+<tr>
+<td style="background:#FEFCF7;padding:14px 48px 44px;">
+  <div style="background:#1A1208;border-radius:10px;overflow:hidden;">
+    <img src="${PROC_IMG}"
+         alt="Procurement &amp; Supply Solutions"
+         style="width:100%;height:220px;object-fit:cover;object-position:top;display:block;opacity:0.75;">
+    <div style="padding:28px 28px 24px;">
+      <div style="font-size:9px;font-weight:600;letter-spacing:3px;color:#C9A84C;
+                  text-transform:uppercase;margin-bottom:8px;">III</div>
+      <div style="font-family:'Playfair Display',serif;font-size:20px;color:#fff;
+                  font-weight:700;margin-bottom:8px;">Procurement &amp; Supply Solutions</div>
+      <p style="font-family:'DM Sans',Arial,sans-serif;font-size:13px;color:#9A8C7A;
+                line-height:1.7;margin:0 0 22px;">
+        Streamlining Global Sourcing with Precision and Reliability &mdash; we act as your dedicated sourcing partner, simplifying complex supply chains to deliver high-quality materials and equipment at competitive prices.
+      </p>
+      <table width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width="50%" style="vertical-align:top;padding-right:14px;padding-bottom:16px;">
+            <div style="border-left:2px solid #C9A84C;padding-left:12px;">
+              <div style="font-family:'DM Sans',Arial,sans-serif;font-size:12px;font-weight:600;
+                          color:#fff;margin-bottom:5px;">Strategic Sourcing &amp; Cost Efficiency</div>
+              <p style="font-family:'DM Sans',Arial,sans-serif;font-size:12px;color:#9A8C7A;
+                        line-height:1.65;margin:0;">
+                Leverage our extensive network to secure the best suppliers and negotiate competitive pricing, reducing your operational costs.
+              </p>
+            </div>
+          </td>
+          <td width="50%" style="vertical-align:top;padding-left:14px;padding-bottom:16px;">
+            <div style="border-left:2px solid #C9A84C;padding-left:12px;">
+              <div style="font-family:'DM Sans',Arial,sans-serif;font-size:12px;font-weight:600;
+                          color:#fff;margin-bottom:5px;">Quality &amp; Reliability</div>
+              <p style="font-family:'DM Sans',Arial,sans-serif;font-size:12px;color:#9A8C7A;
+                        line-height:1.65;margin:0;">
+                We prioritise stringent quality assurance and coordinate complex logistics to ensure every item is delivered on time and to specification.
+              </p>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <div style="border-left:2px solid #C9A84C;padding-left:12px;margin-bottom:0;">
+        <div style="font-family:'DM Sans',Arial,sans-serif;font-size:12px;font-weight:600;
+                    color:#fff;margin-bottom:10px;">Diverse Sourcing Capabilities</div>
+        <table width="100%" cellpadding="0" cellspacing="0">
+          <tr>
+            <td width="50%" style="vertical-align:top;padding-right:14px;padding-bottom:10px;">
+              <div style="background:#2E2518;border-radius:6px;padding:12px 14px;">
+                <div style="font-family:'DM Sans',Arial,sans-serif;font-size:11px;font-weight:600;
+                            color:#C9A84C;margin-bottom:4px;">Industrial &amp; Commercial</div>
+                <p style="font-family:'DM Sans',Arial,sans-serif;font-size:11px;color:#9A8C7A;
+                          line-height:1.6;margin:0;">
+                  Machinery, specialised tools, and safety equipment (PPE).
+                </p>
+              </div>
+            </td>
+            <td width="50%" style="vertical-align:top;padding-left:14px;padding-bottom:10px;">
+              <div style="background:#2E2518;border-radius:6px;padding:12px 14px;">
+                <div style="font-family:'DM Sans',Arial,sans-serif;font-size:11px;font-weight:600;
+                            color:#C9A84C;margin-bottom:4px;">Construction Materials</div>
+                <p style="font-family:'DM Sans',Arial,sans-serif;font-size:11px;color:#9A8C7A;
+                          line-height:1.6;margin:0;">
+                  High-grade cement, steel, roofing, and electrical fittings.
+                </p>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td width="50%" style="vertical-align:top;padding-right:14px;">
+              <div style="background:#2E2518;border-radius:6px;padding:12px 14px;">
+                <div style="font-family:'DM Sans',Arial,sans-serif;font-size:11px;font-weight:600;
+                            color:#C9A84C;margin-bottom:4px;">Bulk Commodities</div>
+                <p style="font-family:'DM Sans',Arial,sans-serif;font-size:11px;color:#9A8C7A;
+                          line-height:1.6;margin:0;">
+                  Industrial and edible salt, and diverse raw materials for manufacturing.
+                </p>
+              </div>
+            </td>
+            <td width="50%" style="vertical-align:top;padding-left:14px;">
+              <div style="background:#2E2518;border-radius:6px;padding:12px 14px;">
+                <div style="font-family:'DM Sans',Arial,sans-serif;font-size:11px;font-weight:600;
+                            color:#C9A84C;margin-bottom:4px;">Household &amp; Specialised Items</div>
+                <p style="font-family:'DM Sans',Arial,sans-serif;font-size:11px;color:#9A8C7A;
+                          line-height:1.6;margin:0;">
+                  Premium appliances, hard-to-find components, and custom-order products.
+                </p>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</td>
+</tr>
 
-<tr><td style="background:#1A1208;padding:40px 48px;text-align:center"><div style="font-size:10px;font-weight:600;letter-spacing:4px;color:#C9A84C;text-transform:uppercase;margin-bottom:20px">Brands We\u2019ve Worked With</div><img src="${BRANDS_IMG}" alt="Brands" style="width:100%;max-width:520px;height:auto;display:block;margin:0 auto;border-radius:8px"></td></tr>
+<tr>
+<td style="background:#C9A84C;padding:28px 48px;">
+  <div style="text-align:center;">
+    <div style="font-family:'Playfair Display',Georgia,serif;font-size:22px;font-weight:700;
+                color:#1A1208;line-height:1.4;letter-spacing:0.5px;">
+      Building Foundations. &nbsp; Branding Futures. &nbsp; Connecting Markets.
+    </div>
+  </div>
+</td>
+</tr>
 
-<tr><td style="padding:0"><div style="position:relative"><img src="${CTA_BG}" alt="Ready" style="width:100%;height:360px;object-fit:cover;object-position:top;display:block;filter:brightness(0.35)"><table width="100%" cellpadding="0" cellspacing="0" style="position:absolute;top:0;left:0;height:360px"><tr><td style="text-align:center;vertical-align:middle;padding:40px"><div style="font-family:'Playfair Display',Georgia,serif;font-size:32px;font-weight:900;color:#fff;margin-bottom:10px;line-height:1.2">${v.ctaHeading || ''}</div><div style="font-size:14px;color:#D8CCBA;margin-bottom:28px">${v.ctaSubtext || ''}</div><a href="mailto:smic360ltd@gmail.com" style="display:inline-block;background:#C9A84C;color:#1A1208;font-weight:700;font-size:13px;text-decoration:none;padding:14px 32px;border-radius:8px;letter-spacing:1.5px;margin-right:10px">EMAIL US NOW</a><a href="tel:+233203361155" style="display:inline-block;background:transparent;color:#C9A84C;font-weight:700;font-size:13px;text-decoration:none;padding:13px 28px;border-radius:8px;letter-spacing:1.5px;border:2px solid #C9A84C">CALL US</a></td></tr></table></div></td></tr>
+<tr>
+<td style="background:#1A1208;padding:52px 48px;">
+  <div style="font-size:10px;font-weight:600;letter-spacing:4px;color:#C9A84C;
+              text-transform:uppercase;margin-bottom:12px;">Our Approach</div>
+  <div style="font-family:'Playfair Display',Georgia,serif;font-size:28px;font-weight:700;
+              color:#fff;line-height:1.2;margin-bottom:32px;">
+    A Structured Process,<br>Guaranteed Results
+  </div>
 
-<tr><td style="background:#0E0B06;padding:40px 48px 28px"><table width="100%" cellpadding="0" cellspacing="0"><tr><td width="50%" style="vertical-align:top;padding-right:24px"><div style="margin-bottom:10px"><img src="${LOGO_CLOUD}" alt="SMIC360" style="width:48px;height:48px;object-fit:contain;border-radius:6px;display:inline-block;vertical-align:middle;margin-right:10px"><span style="font-family:'Playfair Display',Georgia,serif;font-size:26px;font-weight:900;color:#fff;letter-spacing:-0.5px;vertical-align:middle">SMIC<span style="color:#C9A84C">360</span> <span style="font-size:14px;color:#C9A84C;font-weight:400;letter-spacing:1px">LIMITED</span></span></div><div style="font-size:10px;letter-spacing:3px;color:#6B5F51;text-transform:uppercase;margin-bottom:22px">Advertising &middot; Branding &middot; Marketing</div><div style="font-size:13px;color:#9A8C7A;line-height:1.9">1st Floor, Verostina House<br>Opp. DSTV Office, Comm. 18<br>Off Spintex Road, Accra, Ghana</div></td><td width="50%" style="vertical-align:top;padding-left:24px;border-left:1px solid #2E2518"><div style="font-size:10px;font-weight:600;letter-spacing:3px;color:#C9A84C;text-transform:uppercase;margin-bottom:16px">Get In Touch</div><p style="font-size:14px;color:#fff;margin:0 0 10px">020 336 1155</p><p style="font-size:14px;color:#fff;margin:0 0 10px">054 166 5108</p><p style="font-size:14px;color:#C9A84C;margin:0 0 10px">smic360ltd@gmail.com</p><p style="font-size:14px;color:#C9A84C;margin:0 0 18px">www.smic360.com</p><div style="font-size:12px;color:#6B5F51"><span style="color:#C9A84C">f</span> @smic360limited &nbsp;&middot;&nbsp; <span style="color:#C9A84C">&#9673;</span> smic360_limited</div></td></tr></table></td></tr>
+  <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;">
+    <tr>
+      <td width="42" style="vertical-align:top;padding-right:16px;">
+        <div style="width:38px;height:38px;background:#C9A84C;border-radius:50%;
+                    text-align:center;line-height:38px;font-family:'Playfair Display',serif;
+                    font-size:16px;color:#1A1208;font-weight:700;">1</div>
+      </td>
+      <td style="vertical-align:top;">
+        <div style="font-family:'DM Sans',Arial,sans-serif;font-size:14px;font-weight:600;
+                    color:#fff;margin-bottom:4px;">Consultancy Work</div>
+        <p style="font-family:'DM Sans',Arial,sans-serif;font-size:13px;color:#9A8C7A;
+                  line-height:1.7;margin:0;">
+          We meet to assess your needs, agree on budget and timelines, carry out research,
+          then present a tailored implementation plan.
+        </p>
+      </td>
+    </tr>
+  </table>
 
-<tr><td style="background:#080603;padding:16px 48px;border-radius:0 0 12px 12px"><table width="100%" cellpadding="0" cellspacing="0"><tr><td style="font-size:11px;color:#3D3228">&copy; 2026 SMIC360 Limited. All rights reserved. Accra, Ghana.</td><td align="right" style="font-size:11px;color:#3D3228"><a href="#" style="color:#3D3228;text-decoration:none">Unsubscribe</a></td></tr></table></td></tr>
+  <div style="border-top:1px solid #2E2518;margin:0 0 20px;"></div>
 
-</table></td></tr></table>
-</body></html>`;
+  <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;">
+    <tr>
+      <td width="42" style="vertical-align:top;padding-right:16px;">
+        <div style="width:38px;height:38px;background:#C9A84C;border-radius:50%;
+                    text-align:center;line-height:38px;font-family:'Playfair Display',serif;
+                    font-size:16px;color:#1A1208;font-weight:700;">2</div>
+      </td>
+      <td style="vertical-align:top;">
+        <div style="font-family:'DM Sans',Arial,sans-serif;font-size:14px;font-weight:600;
+                    color:#fff;margin-bottom:4px;">Concept &amp; Campaign</div>
+        <p style="font-family:'DM Sans',Arial,sans-serif;font-size:13px;color:#9A8C7A;
+                  line-height:1.7;margin:0;">
+          We develop creative concepts, layouts, PR interventions and media placements
+          targeted to your audience.
+        </p>
+      </td>
+    </tr>
+  </table>
+
+  <div style="border-top:1px solid #2E2518;margin:0 0 20px;"></div>
+
+  <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;">
+    <tr>
+      <td width="42" style="vertical-align:top;padding-right:16px;">
+        <div style="width:38px;height:38px;background:#C9A84C;border-radius:50%;
+                    text-align:center;line-height:38px;font-family:'Playfair Display',serif;
+                    font-size:16px;color:#1A1208;font-weight:700;">3</div>
+      </td>
+      <td style="vertical-align:top;">
+        <div style="font-family:'DM Sans',Arial,sans-serif;font-size:14px;font-weight:600;
+                    color:#fff;margin-bottom:4px;">Implementation &amp; Monitoring</div>
+        <p style="font-family:'DM Sans',Arial,sans-serif;font-size:13px;color:#9A8C7A;
+                  line-height:1.7;margin:0;">
+          We execute and monitor all activities with precision, then present a full
+          performance report for evaluation.
+        </p>
+      </td>
+    </tr>
+  </table>
+
+  <div style="border-top:1px solid #2E2518;margin:0 0 20px;"></div>
+
+  <div style="background:#C9A84C;border-radius:8px;padding:18px 22px;margin-top:8px;">
+    <div style="font-family:'DM Sans',Arial,sans-serif;font-size:12px;font-weight:600;
+                letter-spacing:2px;color:#1A1208;text-transform:uppercase;margin-bottom:6px;">
+      Flexible Payment Options
+    </div>
+    <div style="font-family:'DM Sans',Arial,sans-serif;font-size:13px;color:#1A1208;line-height:1.7;">
+      <strong>Pay Per Project</strong> &mdash; pay individually for each task or campaign &nbsp;|&nbsp;
+      <strong>Retainer Package</strong> &mdash; flat monthly or quarterly fee covering Creative, Marketing,
+      Media/PR, or our full <em>General Retainer</em> for all-inclusive service with no extra charges.
+    </div>
+  </div>
+</td>
+</tr>
+
+<tr>
+<td style="background:#FEFCF7;padding:52px 48px;">
+  <div style="font-size:10px;font-weight:600;letter-spacing:4px;color:#C9A84C;
+              text-transform:uppercase;margin-bottom:12px;">Client Testimonials</div>
+  <div style="font-family:'Playfair Display',Georgia,serif;font-size:28px;font-weight:700;
+              color:#1A1208;margin-bottom:32px;">Words from Those We've Served</div>
+
+  <div style="background:#fff;border-left:4px solid #C9A84C;border-radius:0 8px 8px 0;
+              padding:22px 24px;margin-bottom:18px;box-shadow:0 2px 12px rgba(0,0,0,0.05);">
+    <p style="font-family:'DM Sans',Arial,sans-serif;font-size:14px;color:#4A4036;
+              line-height:1.8;margin:0 0 14px;font-style:italic;">
+      &ldquo;Despite our tight deadlines, we could still count on their creativity and delivery
+      which met our demands and the evolving market of our organization.&rdquo;
+    </p>
+    <div style="font-size:12px;font-weight:600;color:#1A1208;letter-spacing:1px;">
+      Suleiman Habuba, Media Director
+    </div>
+    <div style="font-size:11px;color:#9A8C7A;margin-top:2px;">
+      Confederation of African Football (CAF)
+    </div>
+  </div>
+
+  <div style="background:#fff;border-left:4px solid #C9A84C;border-radius:0 8px 8px 0;
+              padding:22px 24px;margin-bottom:18px;box-shadow:0 2px 12px rgba(0,0,0,0.05);">
+    <p style="font-family:'DM Sans',Arial,sans-serif;font-size:14px;color:#4A4036;
+              line-height:1.8;margin:0 0 14px;font-style:italic;">
+      &ldquo;If anyone knows BRANDING, this is the place to go for a good image and awesome
+      communicative artworks. Thanks so much for my design.&rdquo;
+    </p>
+    <div style="font-size:12px;font-weight:600;color:#1A1208;letter-spacing:1px;">Katherine</div>
+    <div style="font-size:11px;color:#9A8C7A;margin-top:2px;">Montessori Training Center</div>
+  </div>
+
+  <div style="background:#fff;border-left:4px solid #C9A84C;border-radius:0 8px 8px 0;
+              padding:22px 24px;box-shadow:0 2px 12px rgba(0,0,0,0.05);">
+    <p style="font-family:'DM Sans',Arial,sans-serif;font-size:14px;color:#4A4036;
+              line-height:1.8;margin:0 0 14px;font-style:italic;">
+      &ldquo;It is as if the company knew my needs even before I could tell them! They have the
+      ability to work within your budget and produce with topmost quality.&rdquo;
+    </p>
+    <div style="font-size:12px;font-weight:600;color:#1A1208;letter-spacing:1px;">
+      Clara Pinkrah-Sam, CEO
+    </div>
+    <div style="font-size:11px;color:#9A8C7A;margin-top:2px;">Claturally Natural Hair</div>
+  </div>
+</td>
+</tr>
+
+<tr>
+  <td style="background:#1A1208;padding:40px 48px;text-align:center;">
+    <div style="font-size:10px;font-weight:600;letter-spacing:4px;color:#C9A84C;
+                text-transform:uppercase;margin-bottom:20px;font-family:'DM Sans',Arial,sans-serif;">
+      Brands We've Worked With
+    </div>
+    <img src="${BRANDS_IMG}"
+         alt="Brands We've Worked With"
+         style="width:100%;max-width:520px;height:auto;display:block;margin:0 auto;border-radius:8px;">
+  </td>
+</tr>
+
+<tr>
+<td style="padding:0;">
+  <div style="position:relative;">
+    <img src="${CTA_BG}"
+         alt="Ready to grow"
+         style="width:100%;height:360px;object-fit:cover;object-position:top;display:block;filter:brightness(0.35);">
+    <table width="100%" cellpadding="0" cellspacing="0"
+           style="position:absolute;top:0;left:0;height:360px;">
+      <tr>
+        <td style="text-align:center;vertical-align:middle;padding:40px;">
+          <div style="font-family:'Playfair Display',Georgia,serif;font-size:32px;font-weight:900;
+                      color:#fff;margin-bottom:10px;line-height:1.2;">
+            ${v.ctaHeading || ''}
+          </div>
+          <div style="font-family:'DM Sans',Arial,sans-serif;font-size:14px;color:#D8CCBA;
+                      margin-bottom:28px;">
+            ${v.ctaSubtext || ''}
+          </div>
+          <a href="mailto:smic360ltd@gmail.com"
+             style="display:inline-block;background:#C9A84C;color:#1A1208;font-weight:700;
+                    font-size:13px;text-decoration:none;padding:14px 32px;border-radius:8px;
+                    letter-spacing:1.5px;font-family:'DM Sans',Arial,sans-serif;margin-right:10px;">
+            EMAIL US NOW
+          </a>
+          <a href="tel:+233203361155"
+             style="display:inline-block;background:transparent;color:#C9A84C;font-weight:700;
+                    font-size:13px;text-decoration:none;padding:13px 28px;border-radius:8px;
+                    letter-spacing:1.5px;border:2px solid #C9A84C;font-family:'DM Sans',Arial,sans-serif;">
+            CALL US
+          </a>
+        </td>
+      </tr>
+    </table>
+  </div>
+</td>
+</tr>
+
+<tr>
+<td style="background:#0E0B06;padding:40px 48px 28px;">
+  <table width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+      <td width="50%" style="vertical-align:top;padding-right:24px;">
+        <div style="margin-bottom:10px;">
+          <img src="${LOGO_CLOUD}"
+               alt="SMIC360 Logo"
+               style="width:48px;height:48px;object-fit:contain;border-radius:6px;display:inline-block;vertical-align:middle;margin-right:10px;">
+          <span style="font-family:'Playfair Display',Georgia,serif;font-size:26px;font-weight:900;
+                      color:#fff;letter-spacing:-0.5px;vertical-align:middle;">
+            SMIC<span style="color:#C9A84C;">360</span> <span style="font-size:14px;color:#C9A84C;font-weight:400;letter-spacing:1px;">LIMITED</span>
+          </span>
+        </div>
+        <div style="font-size:10px;letter-spacing:3px;color:#6B5F51;text-transform:uppercase;
+                    margin-bottom:22px;">Advertising &middot; Branding &middot; Marketing</div>
+        <div style="font-family:'DM Sans',Arial,sans-serif;font-size:13px;color:#9A8C7A;
+                    line-height:1.9;">
+          1st Floor, Verostina House<br>
+          Opp. DSTV Office, Comm. 18<br>
+          Off Spintex Road, Accra, Ghana
+        </div>
+      </td>
+      <td width="50%" style="vertical-align:top;padding-left:24px;border-left:1px solid #2E2518;">
+        <div style="font-size:10px;font-weight:600;letter-spacing:3px;color:#C9A84C;
+                    text-transform:uppercase;margin-bottom:16px;">Get In Touch</div>
+        <table cellpadding="0" cellspacing="0" style="margin-bottom:10px;">
+          <tr>
+            <td style="width:20px;vertical-align:top;">
+              <span style="color:#C9A84C;font-size:14px;">&#128222;</span>
+            </td>
+            <td style="padding-left:8px;">
+              <a href="tel:+233203361155"
+                 style="font-family:'DM Sans',Arial,sans-serif;font-size:14px;color:#fff;
+                        text-decoration:none;font-weight:500;">020 336 1155</a>
+            </td>
+          </tr>
+        </table>
+        <table cellpadding="0" cellspacing="0" style="margin-bottom:10px;">
+          <tr>
+            <td style="width:20px;vertical-align:top;">
+              <span style="color:#C9A84C;font-size:14px;">&#128222;</span>
+            </td>
+            <td style="padding-left:8px;">
+              <a href="tel:+233541665108"
+                 style="font-family:'DM Sans',Arial,sans-serif;font-size:14px;color:#fff;
+                        text-decoration:none;font-weight:500;">054 166 5108</a>
+            </td>
+          </tr>
+        </table>
+        <table cellpadding="0" cellspacing="0" style="margin-bottom:10px;">
+          <tr>
+            <td style="width:20px;vertical-align:top;">
+              <span style="color:#C9A84C;font-size:14px;">&#9993;</span>
+            </td>
+            <td style="padding-left:8px;">
+              <a href="mailto:smic360ltd@gmail.com"
+                 style="font-family:'DM Sans',Arial,sans-serif;font-size:14px;color:#C9A84C;
+                        text-decoration:none;font-weight:500;">smic360ltd@gmail.com</a>
+            </td>
+          </tr>
+        </table>
+        <table cellpadding="0" cellspacing="0" style="margin-bottom:18px;">
+          <tr>
+            <td style="width:20px;vertical-align:top;">
+              <span style="color:#C9A84C;font-size:14px;">&#127760;</span>
+            </td>
+            <td style="padding-left:8px;">
+              <a href="http://www.smic360.com"
+                 style="font-family:'DM Sans',Arial,sans-serif;font-size:14px;color:#C9A84C;
+                        text-decoration:none;font-weight:500;">www.smic360.com</a>
+            </td>
+          </tr>
+        </table>
+        <div style="font-family:'DM Sans',Arial,sans-serif;font-size:12px;color:#6B5F51;">
+          <span style="color:#C9A84C;">f</span> @smic360limited &nbsp;&middot;&nbsp;
+          <span style="color:#C9A84C;">&#9673;</span> smic360_limited
+        </div>
+      </td>
+    </tr>
+  </table>
+</td>
+</tr>
+
+<tr>
+<td style="background:#080603;padding:16px 48px;border-radius:0 0 12px 12px;">
+  <table width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+      <td style="font-family:'DM Sans',Arial,sans-serif;font-size:11px;color:#3D3228;">
+        &copy; 2026 SMIC360 Limited. All rights reserved. Accra, Ghana.
+      </td>
+      <td align="right" style="font-family:'DM Sans',Arial,sans-serif;font-size:11px;color:#3D3228;">
+        <a href="#" style="color:#3D3228;text-decoration:none;">Unsubscribe</a>
+      </td>
+    </tr>
+  </table>
+</td>
+</tr>
+
+</table>
+</td></tr>
+</table>
+
+</body>
+</html>`;
 }
